@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Demo",
-    "slug": "Demo",
+    "name": "Google-Keep-Clone-App",
+    "slug": "Google-Keep-Clone-App",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "Demo"
+    "scheme": "Google-Keep-Clone-App"
   }
 }
