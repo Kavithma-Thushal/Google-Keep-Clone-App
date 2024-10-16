@@ -1,4 +1,4 @@
-# 🌟 Advanced Mobile Application Development 🌟
+# 🌟 Demo 🌟
 
 This repository contains the coursework for **Advanced Mobile Application Development** as part of the GDSE66 program.
 
@@ -8,7 +8,7 @@ This repository contains the coursework for **Advanced Mobile Application Develo
 ✅ **Expo**<br/>
 ✅ **Firebase**<br/>
 
-## 🚀 Learning Objectives
+## 🚀 Features
 
 ✅ Building and deploying cross-platform mobile applications with React Native and Expo.<br/>
 ✅ Integrating Firebase for data storage and real-time updates.<br/>
