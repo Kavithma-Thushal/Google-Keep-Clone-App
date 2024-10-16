@@ -1,20 +1,23 @@
-# 🌟 Demo 🌟
+# 🌟 Google Keep Clone 🌟
 
-This repository contains the coursework for **Advanced Mobile Application Development** as part of the GDSE66 program.
+This repository contains the coursework project for **Advanced Mobile Application Development** as part of the GDSE66 program. The project replicates key functionalities of Google Keep, providing a feature-rich note-taking application.
 
 ## 🛠️ Tech Stack
 
 ✅ **React Native**<br/>
 ✅ **Expo**<br/>
+✅ **Express**<br/>
+✅ **MongoDB**<br/>
 ✅ **Firebase**<br/>
 
 ## 🚀 Features
 
-✅ Building and deploying cross-platform mobile applications with React Native and Expo.<br/>
-✅ Integrating Firebase for data storage and real-time updates.<br/>
-✅ Utilizing REST APIs for data fetching and dynamic content.<br/>
-✅ Implementing authentication, user profiles, and secure data handling.<br/>
-✅ Optimizing for performance and responsiveness across devices.<br/>
+✅ **User Authentication**: Secure login with Firebase Authentication.<br/>
+✅ **Note Creation & Organization**: Create, edit, and delete notes with color-coding for easy organization.<br/>
+✅ **Task Lists**: Add task lists to notes for enhanced functionality.<br/>
+✅ **Reminders**: Set reminders to stay on top of tasks and important notes.<br/>
+✅ **Search Functionality**: Quickly find notes with an integrated search feature.<br/>
+✅ **Media Attachments**: Add images to notes, with storage handled through Firebase.<br/>
 
 ## 📝 Version
 
