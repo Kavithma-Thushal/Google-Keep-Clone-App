@@ -28,7 +28,7 @@ If you encounter any issues, have questions, or need assistance, feel free to re
 
 <div align="center">
 
-#### This project is licensed under the [MIT License](LICENSE)
+#### This project is licensed under the [GNU License](LICENSE)
 
 #### © 2024 All Rights Reserved | Designed by [Kavithma Thushal](https://github.com/Kavithma-Thushal)
 
