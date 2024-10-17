@@ -1,21 +1,38 @@
-import React from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { useRouter } from "expo-router";
+import { auth } from "../FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Index() {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const login = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      if (userCredential) {
+        Alert.alert("Success", "Login Successfully!");
+        router.push("home");
+      }
+    } catch (error) {
+      Alert.alert("Login Failed", error.message);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-
         <Text style={styles.title}>Welcome Back!</Text>
-        <Text style={styles.subtitle}>please login to continue</Text>
+        <Text style={styles.subtitle}>Please login to continue</Text>
 
         <TextInput
           style={styles.input}
           placeholder="Email"
           placeholderTextColor="#aaa"
+          value={email}
+          onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
         />
@@ -24,18 +41,19 @@ export default function Index() {
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#aaa"
+          value={password}
+          onChangeText={setPassword}
           secureTextEntry
           autoCapitalize="none"
         />
 
-        <TouchableOpacity style={styles.button} onPress={() => router.push("home")}>
+        <TouchableOpacity style={styles.button} onPress={login}>
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => router.push("register")}>
-          <Text style={styles.link}>Didn't have an account ?</Text>
+          <Text style={styles.link}>Didn't have an account?</Text>
         </TouchableOpacity>
-
       </View>
     </View>
   );

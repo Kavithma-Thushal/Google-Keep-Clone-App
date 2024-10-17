@@ -1,7 +1,25 @@
-import React from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { useRouter } from "expo-router";
+import { auth } from "../FirebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function Register() {
+    const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const register = async () => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            if (userCredential) {
+                Alert.alert("Registration Success", "Your account has been created successfully!");
+            }
+        } catch (error) {
+            Alert.alert("Registration Failed", error.message);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
@@ -11,6 +29,8 @@ export default function Register() {
                     style={styles.input}
                     placeholder="Email"
                     placeholderTextColor="#aaa"
+                    value={email}
+                    onChangeText={setEmail}
                     keyboardType="email-address"
                     autoCapitalize="none"
                 />
@@ -19,11 +39,13 @@ export default function Register() {
                     style={styles.input}
                     placeholder="Password"
                     placeholderTextColor="#aaa"
+                    value={password}
+                    onChangeText={setPassword}
                     secureTextEntry
                     autoCapitalize="none"
                 />
 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={register}>
                     <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
             </View>
@@ -55,12 +77,6 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         textAlign: "center",
     },
-    subtitle: {
-        fontSize: 16,
-        color: "#666",
-        marginBottom: 32,
-        textAlign: "center",
-    },
     input: {
         height: 50,
         backgroundColor: "#fff",
@@ -87,12 +103,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         color: "#333",
-    },
-    link: {
-        marginTop: 20,
-        color: "#1a73e8",
-        textAlign: "center",
-        fontSize: 15,
-        fontWeight: "500",
     },
 });
