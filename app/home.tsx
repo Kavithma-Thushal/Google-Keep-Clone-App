@@ -1,50 +1,53 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function Home() {
     return (
         <View style={styles.container}>
 
-            <Text style={styles.title}>Welcome to Google Keep</Text>
-            <Text style={styles.subtitle}>Your notes, organized and accessible</Text>
-
-            <View style={styles.noteCard}>
-                <Text style={styles.noteTitle}>Note 1</Text>
-                <Text style={styles.noteContent}>
-                    This is a sample note. You can add your notes, tasks, and reminders here.
-                </Text>
+            {/* Search Bar */}
+            <View style={styles.searchBar}>
+                <MaterialIcons name="menu" size={28} color="black" />
+                <Text style={styles.searchText}>Search your notes</Text>
+                <Image
+                    style={styles.profileIcon}
+                    source={{
+                        uri: 'https://randomuser.me/api/portraits/men/9.jpg',
+                    }}
+                />
             </View>
 
-            <View style={styles.noteCard}>
-                <Text style={styles.noteTitle}>Note 2</Text>
-                <Text style={styles.noteContent}>
-                    This is a sample note. You can add your notes, tasks, and reminders here.
-                </Text>
+            {/* Empty State */}
+            <View style={styles.emptyState}>
+                <MaterialIcons name="lightbulb-outline" size={100} color="#fbbc04" />
+                <Text style={styles.emptyText}>Notes you add appear here</Text>
             </View>
 
-            <View style={styles.noteCard}>
-                <Text style={styles.noteTitle}>Note 3</Text>
-                <Text style={styles.noteContent}>
-                    This is a sample note. You can add your notes, tasks, and reminders here.
-                </Text>
+            {/* Bottom Toolbar */}
+            <View style={styles.bottomToolbar}>
+                <TouchableOpacity>
+                    <MaterialIcons name="check-box" size={28} color="black" />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <MaterialIcons name="brush" size={28} color="black" />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <MaterialIcons name="mic" size={28} color="black" />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <MaterialIcons name="image" size={28} color="black" />
+                </TouchableOpacity>
             </View>
 
-            <View style={styles.noteCard}>
-                <Text style={styles.noteTitle}>Note 4</Text>
-                <Text style={styles.noteContent}>
-                    This is a sample note. You can add your notes, tasks, and reminders here.
-                </Text>
-            </View>
-
-            <View style={styles.noteCard}>
-                <Text style={styles.noteTitle}>Note 5</Text>
-                <Text style={styles.noteContent}>
-                    This is a sample note. You can add your notes, tasks, and reminders here.
-                </Text>
-            </View>
-
-            <TouchableOpacity style={styles.addButton}>
-                <Text style={styles.addButtonText}>+ Add Note</Text>
+            {/* Floating Action Button */}
+            <TouchableOpacity style={styles.floatingButton}>
+                <Image
+                    source={{
+                        uri: 'https://cdn-icons-png.flaticon.com/512/992/992651.png',
+                    }}
+                    style={styles.fabIcon}
+                />
             </TouchableOpacity>
         </View>
     );
@@ -53,63 +56,64 @@ export default function Home() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#f5f5f5",
+        justifyContent: "center",
+    },
+    searchBar: {
+        flexDirection: "row",
+        alignItems: "center",
+        backgroundColor: "#e0e0e0",
+        padding: 10,
+        marginTop: 10,
+        borderRadius: 8,
+        marginHorizontal: 10,
+        height: 50,
+        justifyContent: 'space-between',
+    },
+    searchText: {
+        color: "#888",
+        fontSize: 18,
+        marginLeft: 10,
+        flex: 1,
+    },
+    profileIcon: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: "#f5f5f5",
+    },
+    emptyState: {
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#f5f5f5",
-        paddingHorizontal: 20,
     },
-    title: {
-        fontSize: 30,
-        fontWeight: "bold",
-        color: "#333",
-        textAlign: "center",
-        marginBottom: 8,
-    },
-    subtitle: {
-        fontSize: 16,
-        color: "#666",
-        textAlign: "center",
-        marginBottom: 20,
-        fontStyle: "italic",
-    },
-    noteCard: {
-        width: "90%",
-        backgroundColor: "#FFF8E1",
-        borderRadius: 10,
-        padding: 15,
-        marginBottom: 10,
-        shadowColor: "#000",
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-        shadowOffset: { width: 0, height: 4 },
-        elevation: 2,
-    },
-    noteTitle: {
+    emptyText: {
+        color: "black",
         fontSize: 18,
-        fontWeight: "bold",
-        color: "#333",
-        marginBottom: 5,
-    },
-    noteContent: {
-        fontSize: 14,
-        color: "#555",
-    },
-    addButton: {
-        backgroundColor: "#fbbc04",
-        paddingVertical: 14,
-        borderRadius: 8,
-        alignItems: "center",
         marginTop: 10,
-        shadowColor: "#000",
-        shadowOpacity: 0.2,
-        shadowRadius: 5,
-        shadowOffset: { width: 0, height: 4 },
-        elevation: 3,
-        width: "90%",
     },
-    addButtonText: {
-        fontSize: 16,
-        fontWeight: "bold",
-        color: "#333",
+    bottomToolbar: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        backgroundColor: "#f5f5f5",
+        paddingVertical: 10,
+        borderTopColor: "#ccc",
+        borderTopWidth: 1,
+    },
+    floatingButton: {
+        position: "absolute",
+        bottom: 30,
+        right: 30,
+        backgroundColor: "#f5f5f5",
+        borderRadius: 50,
+        width: 60,
+        height: 60,
+        justifyContent: "center",
+        alignItems: "center",
+        elevation: 5,
+    },
+    fabIcon: {
+        width: 28,
+        height: 28,
     },
 });
