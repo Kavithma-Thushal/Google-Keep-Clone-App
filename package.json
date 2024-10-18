@@ -7,9 +7,7 @@
   "description": "This is the Coursework for Advanced Mobile Application Development in GDSE66 @ijse.",
   "main": "expo-router/entry",
   "scripts": {
-    "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios",
     "web": "expo start --web"
   },
   "dependencies": {

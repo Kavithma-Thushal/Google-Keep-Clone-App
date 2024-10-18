@@ -20,6 +20,33 @@ This repository contains the coursework project for **Advanced Mobile Applicatio
 ✅ **Media Attachments**: Allow users to attach images to notes, with media stored securely via Firebase Storage.<br/>
 ✅ **User Profiles**: User profiles are created and managed to store personalized note data, task lists, reminders, and any associated media.<br/>
 
+## 📸 Screenshots
+
+<div align="left">
+  <table>
+    <tr>
+      <td align="left">
+      <p>Login</p>
+        <img src='assets/images/ss/Login.png' alt='Login' width='350px'>
+      </td>
+      <td align="left">
+      <p>Register</p>
+        <img src='assets/images/ss/Register.png' alt='Register' width='350px'>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+      <p>Home</p>
+        <img src='assets/images/ss/Home.png' alt='Home' width='350px'>
+      </td>
+      <td align="left">
+      <p>Home</p>
+        <img src='assets/images/ss/Home.png' alt='Home' width='350px'>
+      </td>
+    </tr>
+  </table>
+</div>
+
 ## 📝 Version
 
 **1.0.0**
