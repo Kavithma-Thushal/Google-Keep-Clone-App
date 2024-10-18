@@ -8,14 +8,10 @@ export default function Home() {
 
             {/* Search Bar */}
             <View style={styles.searchBar}>
-                <MaterialIcons name="menu" size={28} color="black" />
+                <MaterialIcons name="menu" size={26} color="black" />
                 <Text style={styles.searchText}>Search your notes</Text>
-                <Image
-                    style={styles.profileIcon}
-                    source={{
-                        uri: 'https://randomuser.me/api/portraits/men/9.jpg',
-                    }}
-                />
+                <MaterialIcons name="view-module" size={26} color="black" style={styles.viewIcon} />
+                <Image style={styles.profileIcon} source={require('../assets/images/profile.png')} />
             </View>
 
             {/* Empty State */}
@@ -26,28 +22,23 @@ export default function Home() {
 
             {/* Bottom Toolbar */}
             <View style={styles.bottomToolbar}>
-                <TouchableOpacity>
-                    <MaterialIcons name="check-box" size={28} color="black" />
+                <TouchableOpacity style={styles.toolbarButton}>
+                    <MaterialIcons name="check-box" size={25} color="gray" />
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <MaterialIcons name="brush" size={28} color="black" />
+                <TouchableOpacity style={styles.toolbarButton}>
+                    <MaterialIcons name="brush" size={25} color="gray" />
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <MaterialIcons name="mic" size={28} color="black" />
+                <TouchableOpacity style={styles.toolbarButton}>
+                    <MaterialIcons name="mic" size={25} color="gray" />
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <MaterialIcons name="image" size={28} color="black" />
+                <TouchableOpacity style={styles.toolbarButton}>
+                    <MaterialIcons name="image" size={25} color="gray" />
                 </TouchableOpacity>
             </View>
 
-            {/* Floating Action Button */}
+            {/* Floating Plus Button */}
             <TouchableOpacity style={styles.floatingButton}>
-                <Image
-                    source={{
-                        uri: 'https://cdn-icons-png.flaticon.com/512/992/992651.png',
-                    }}
-                    style={styles.fabIcon}
-                />
+                <Image style={styles.fabIcon} source={require('../assets/images/plus_button.png')} />
             </TouchableOpacity>
         </View>
     );
@@ -56,29 +47,32 @@ export default function Home() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#faf8ff",
         justifyContent: "center",
     },
     searchBar: {
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: "#e0e0e0",
+        backgroundColor: "#ebebf5",
         padding: 10,
         marginTop: 10,
-        borderRadius: 8,
+        borderRadius: 38,
         marginHorizontal: 10,
         height: 50,
         justifyContent: 'space-between',
     },
     searchText: {
         color: "#888",
-        fontSize: 18,
+        fontSize: 16,
         marginLeft: 10,
         flex: 1,
     },
+    viewIcon: {
+        marginRight: 10,
+    },
     profileIcon: {
-        width: 40,
-        height: 40,
+        width: 35,
+        height: 35,
         borderRadius: 20,
         backgroundColor: "#f5f5f5",
     },
@@ -89,23 +83,31 @@ const styles = StyleSheet.create({
     },
     emptyText: {
         color: "black",
-        fontSize: 18,
+        fontSize: 15,
         marginTop: 10,
     },
     bottomToolbar: {
         flexDirection: "row",
-        justifyContent: "space-around",
-        backgroundColor: "#f5f5f5",
+        justifyContent: "flex-start",
+        backgroundColor: "#eeedf4",
         paddingVertical: 10,
         borderTopColor: "#ccc",
         borderTopWidth: 1,
+        paddingLeft: 35
+    },
+    toolbarButton: {
+        width: 40,
+        height: 40,
+        justifyContent: "center",
+        alignItems: "center",
+        marginRight: 30,
     },
     floatingButton: {
         position: "absolute",
         bottom: 30,
         right: 30,
         backgroundColor: "#f5f5f5",
-        borderRadius: 50,
+        borderRadius: 20,
         width: 60,
         height: 60,
         justifyContent: "center",
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     fabIcon: {
-        width: 28,
-        height: 28,
+        width: 40,
+        height: 40,
     },
 });
