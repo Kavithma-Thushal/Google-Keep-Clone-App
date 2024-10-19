@@ -13,7 +13,7 @@ export default function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       if (userCredential) {
-        Alert.alert("Login Success", "Login Successfully!");
+        Alert.alert("Login Success", "Logged in Successfully!");
         router.push("dashboard");
       }
     } catch (error) {
