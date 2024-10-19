@@ -13,7 +13,8 @@ export default function Register() {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             if (userCredential) {
-                Alert.alert("Registration Success", "Your account has been created successfully!");
+                Alert.alert("Registration Success", "Account has been created!");
+                router.push("login");
             }
         } catch (error) {
             Alert.alert("Registration Failed", error.message);
@@ -23,11 +24,13 @@ export default function Register() {
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
-                <Text style={styles.title}>Register</Text>
+
+                <Text style={styles.title}>Create a New Account</Text>
+                <Text style={styles.subtitle}>Sign up to start using Google Keep</Text>
 
                 <TextInput
                     style={styles.input}
-                    placeholder="Email"
+                    placeholder="Enter your email"
                     placeholderTextColor="#aaa"
                     value={email}
                     onChangeText={setEmail}
@@ -37,7 +40,7 @@ export default function Register() {
 
                 <TextInput
                     style={styles.input}
-                    placeholder="Password"
+                    placeholder="Create a password"
                     placeholderTextColor="#aaa"
                     value={password}
                     onChangeText={setPassword}
@@ -48,6 +51,11 @@ export default function Register() {
                 <TouchableOpacity style={styles.button} onPress={register}>
                     <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => router.push("login")}>
+                    <Text style={styles.link}>Already have an account? Login</Text>
+                </TouchableOpacity>
+                
             </View>
         </View>
     );
@@ -57,13 +65,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#faf8ff",
         paddingHorizontal: 20,
     },
     innerContainer: {
-        backgroundColor: "rgba(255, 255, 255, 0.9)",
+        backgroundColor: "#fff",
         borderRadius: 12,
         padding: 20,
+        marginVertical: 20,
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 5,
@@ -71,28 +80,34 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     title: {
-        fontSize: 30,
+        fontSize: 28,
         fontWeight: "bold",
         color: "#333",
+        marginBottom: 10,
+        textAlign: "center",
+    },
+    subtitle: {
+        fontSize: 16,
+        color: "#666",
         marginBottom: 30,
         textAlign: "center",
     },
     input: {
         height: 50,
-        backgroundColor: "#fff",
+        backgroundColor: "#f5f5f5",
         borderColor: "#ddd",
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: 10,
         paddingHorizontal: 16,
         fontSize: 16,
-        marginBottom: 16,
+        marginBottom: 20,
     },
     button: {
         backgroundColor: "#fbbc04",
-        paddingVertical: 14,
+        paddingVertical: 12,
         borderRadius: 8,
         alignItems: "center",
-        marginVertical: 8,
+        marginVertical: 10,
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 5,
@@ -103,5 +118,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         color: "#333",
+    },
+    link: {
+        marginTop: 15,
+        color: "#1a73e8",
+        textAlign: "center",
+        fontSize: 15,
+        fontWeight: "500",
     },
 });

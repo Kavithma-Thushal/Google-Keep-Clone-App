@@ -13,7 +13,7 @@ export default function Index() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       if (userCredential) {
-        Alert.alert("Success", "Login Successfully!");
+        Alert.alert("Login Success", "Login Successfully!");
         router.push("home");
       }
     } catch (error) {
@@ -24,12 +24,13 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <Text style={styles.title}>Welcome Back!</Text>
-        <Text style={styles.subtitle}>Please login to continue</Text>
+
+        <Text style={styles.title}>Welcome Back to Keep!</Text>
+        <Text style={styles.subtitle}>Login to access your notes</Text>
 
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="Enter your email"
           placeholderTextColor="#aaa"
           value={email}
           onChangeText={setEmail}
@@ -39,7 +40,7 @@ export default function Index() {
 
         <TextInput
           style={styles.input}
-          placeholder="Password"
+          placeholder="Enter your password"
           placeholderTextColor="#aaa"
           value={password}
           onChangeText={setPassword}
@@ -52,8 +53,9 @@ export default function Index() {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => router.push("register")}>
-          <Text style={styles.link}>Didn't have an account?</Text>
+          <Text style={styles.link}>Didn't have an account? create</Text>
         </TouchableOpacity>
+
       </View>
     </View>
   );
@@ -63,13 +65,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#faf8ff",
     paddingHorizontal: 20,
   },
   innerContainer: {
-    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    backgroundColor: "#fff",
     borderRadius: 12,
     padding: 20,
+    marginVertical: 20,
     shadowColor: "#000",
     shadowOpacity: 0.2,
     shadowRadius: 5,
@@ -77,34 +80,34 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: "bold",
     color: "#333",
-    marginBottom: 8,
+    marginBottom: 10,
     textAlign: "center",
   },
   subtitle: {
     fontSize: 16,
     color: "#666",
-    marginBottom: 32,
+    marginBottom: 30,
     textAlign: "center",
   },
   input: {
     height: 50,
-    backgroundColor: "#fff",
+    backgroundColor: "#f5f5f5",
     borderColor: "#ddd",
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 10,
     paddingHorizontal: 16,
     fontSize: 16,
-    marginBottom: 16,
+    marginBottom: 20,
   },
   button: {
     backgroundColor: "#fbbc04",
-    paddingVertical: 14,
+    paddingVertical: 12,
     borderRadius: 8,
     alignItems: "center",
-    marginVertical: 8,
+    marginVertical: 10,
     shadowColor: "#000",
     shadowOpacity: 0.2,
     shadowRadius: 5,
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   link: {
-    marginTop: 20,
+    marginTop: 15,
     color: "#1a73e8",
     textAlign: "center",
     fontSize: 15,
