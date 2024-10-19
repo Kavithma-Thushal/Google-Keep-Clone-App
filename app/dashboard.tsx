@@ -1,8 +1,14 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Modal, TouchableWithoutFeedback } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function Dshboard() {
+export default function Dashboard() {
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
+
     return (
         <View style={styles.container}>
 
@@ -31,10 +37,36 @@ export default function Dshboard() {
                 <TouchableOpacity style={styles.toolbarButton}>
                     <MaterialIcons name="mic" size={25} color="gray" />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.toolbarButton}>
+                <TouchableOpacity style={styles.toolbarButton} onPress={toggleModal}>
                     <MaterialIcons name="image" size={25} color="gray" />
                 </TouchableOpacity>
             </View>
+
+            {/* Image Modal */}
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={isModalVisible}
+                onRequestClose={toggleModal}
+            >
+                <TouchableWithoutFeedback onPress={toggleModal}>
+                    <View style={styles.modalContainer}>
+                        <TouchableWithoutFeedback onPress={() => { }}>
+                            <View style={styles.modalView}>
+                                <Text style={styles.modalText}>Add Image</Text>
+                                <TouchableOpacity style={styles.modalButton}>
+                                    <MaterialIcons name="camera-alt" size={24} color="black" />
+                                    <Text style={styles.modalButtonText}>Take Photo</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.modalButton}>
+                                    <MaterialIcons name="photo" size={24} color="black" />
+                                    <Text style={styles.modalButtonText}>Choose Image</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </View>
+                </TouchableWithoutFeedback>
+            </Modal>
 
             {/* Floating Plus Button */}
             <TouchableOpacity style={styles.floatingButton}>
@@ -117,5 +149,37 @@ const styles = StyleSheet.create({
     fabIcon: {
         width: 40,
         height: 40,
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 25
+    },
+    modalView: {
+        width: 350,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 20,
+        alignItems: "flex-start",
+        elevation: 5,
+    },
+    modalText: {
+        fontSize: 18,
+        fontWeight: "bold",
+        marginBottom: 15,
+        textAlign: "left",
+        width: "100%",
+    },
+    modalButton: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginVertical: 10,
+        width: "100%",
+    },
+    modalButtonText: {
+        marginLeft: 10,
+        fontSize: 16,
+        textAlign: "left",
     },
 });
