@@ -1,129 +1,52 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import React from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import { auth } from "../FirebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
 
-export default function Index() {
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function Home() {
+    const router = useRouter();
 
-  const login = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      if (userCredential) {
-        Alert.alert("Login Success", "Login Successfully!");
-        router.push("home");
-      }
-    } catch (error) {
-      Alert.alert("Login Failed", error.message);
-    }
-  };
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Welcome to Google Keep!</Text>
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.innerContainer}>
-
-        <Text style={styles.title}>Welcome Back to Keep!</Text>
-        <Text style={styles.subtitle}>Login to access your notes</Text>
-
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your email"
-          placeholderTextColor="#aaa"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your password"
-          placeholderTextColor="#aaa"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          autoCapitalize="none"
-        />
-
-        <TouchableOpacity style={styles.button} onPress={login}>
-          <Text style={styles.buttonText}>Log In</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => router.push("register")}>
-          <Text style={styles.link}>Didn't have an account? create</Text>
-        </TouchableOpacity>
-
-      </View>
-    </View>
-  );
+            <TouchableOpacity style={styles.button} onPress={() => router.push("login")}>
+                <Text style={styles.buttonText}>Let's Go</Text>
+            </TouchableOpacity>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#faf8ff",
-    paddingHorizontal: 20,
-  },
-  innerContainer: {
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 20,
-    marginVertical: 20,
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 5,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#333",
-    marginBottom: 10,
-    textAlign: "center",
-  },
-  subtitle: {
-    fontSize: 16,
-    color: "#666",
-    marginBottom: 30,
-    textAlign: "center",
-  },
-  input: {
-    height: 50,
-    backgroundColor: "#f5f5f5",
-    borderColor: "#ddd",
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 16,
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: "#fbbc04",
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: "center",
-    marginVertical: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 3,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#333",
-  },
-  link: {
-    marginTop: 15,
-    color: "#1a73e8",
-    textAlign: "center",
-    fontSize: 15,
-    fontWeight: "500",
-  },
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#faf8ff",
+        paddingHorizontal: 20,
+    },
+    title: {
+        fontSize: 28,
+        fontWeight: "bold",
+        color: "#333",
+        marginBottom: 20,
+        textAlign: "center",
+    },
+    button: {
+        backgroundColor: "#fbbc04",
+        paddingVertical: 12,
+        paddingHorizontal: 30,
+        borderRadius: 8,
+        alignItems: "center",
+        marginVertical: 10,
+        shadowColor: "#000",
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 3,
+    },
+    buttonText: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#333",
+    },
 });

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function Home() {
+export default function Dshboard() {
     return (
         <View style={styles.container}>
 
