@@ -27,31 +27,31 @@ This repository contains the coursework project for **Advanced Mobile Applicatio
     <tr>
       <td align="left">
       <p>Home</p>
-        <img src='assets/images/ss/Home.png' alt='Home' width='365px'>
+        <img src='assets/images/ss/Home.png' alt='Home' width='370px'>
       </td>
       <td align="left">
       <p>Login</p>
-        <img src='assets/images/ss/Login.png' alt='Login' width='365px'>
+        <img src='assets/images/ss/Login.png' alt='Login' width='370px'>
       </td>
     </tr>
     <tr>
       <td align="left">
       <p>Register</p>
-        <img src='assets/images/ss/Register.png' alt='Register' width='365px'>
+        <img src='assets/images/ss/Register.png' alt='Register' width='370px'>
       </td>
       <td align="left">
       <p>Dashboard</p>
-        <img src='assets/images/ss/Dashboard.png' alt='Dashboard' width='365px'>
+        <img src='assets/images/ss/Dashboard.png' alt='Dashboard' width='370px'>
       </td>
     </tr>
     <tr>
       <td align="left">
       <p>Image Picker</p>
-        <img src='assets/images/ss/ImagePicker.png' alt='Image Picker' width='365px'>
+        <img src='assets/images/ss/ImagePicker.png' alt='Image Picker' width='370px'>
       </td>
       <td align="left">
       <p>Upload Image</p>
-        <img src='assets/images/ss/UploadImage.png' alt='Upload Image' width='365px'>
+        <img src='assets/images/ss/UploadImage.png' alt='Upload Image' width='370px'>
       </td>
     </tr>
   </table>
