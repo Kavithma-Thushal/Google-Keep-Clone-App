@@ -8,8 +8,11 @@ export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false); // Add loading state
 
   const login = async () => {
+    setIsLoggingIn(true); // Set loading state to true
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       if (userCredential) {
@@ -18,6 +21,8 @@ export default function Login() {
       }
     } catch (error) {
       Alert.alert("Login Failed", error.message);
+    } finally {
+      setIsLoggingIn(false); // Reset loading state
     }
   };
 
@@ -48,12 +53,18 @@ export default function Login() {
           autoCapitalize="none"
         />
 
-        <TouchableOpacity style={styles.button} onPress={login}>
-          <Text style={styles.buttonText}>Login</Text>
+        <TouchableOpacity style={styles.button} onPress={login} disabled={isLoggingIn}>
+          {isLoggingIn ? (  // Show loader if logging in
+            <View style={styles.loadingContainer}>
+              <Text style={styles.loggingText}> Logging...</Text>
+            </View>
+          ) : (
+            <Text style={styles.buttonText}>Login</Text>
+          )}
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => router.push("register")}>
-          <Text style={styles.link}>Didn't have an account? create</Text>
+          <Text style={styles.link}>Didn't have an account? Create</Text>
         </TouchableOpacity>
 
       </View>
@@ -118,6 +129,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "#333",
+  },
+  loadingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  loggingText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
+    marginLeft: 5, // Add some space between the icon and text
   },
   link: {
     marginTop: 15,

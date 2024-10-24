@@ -8,16 +8,32 @@ export default function Register() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isRegistering, setIsRegistering] = useState(false); // Add loading state
 
     const register = async () => {
+        setIsRegistering(true); // Set loading state to true
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             if (userCredential) {
-                Alert.alert("Registration Success", "Account has been created!");
-                router.push("login");
+                Alert.alert("Registration Success", "Account has been created!", [
+                    {
+                        text: "OK",
+                        onPress: () => {
+                            setIsRegistering(false); // Reset loading state here before navigation
+                            router.push("login");
+                        },
+                    },
+                ]);
             }
         } catch (error) {
-            Alert.alert("Registration Failed", error.message);
+            Alert.alert("Registration Failed", error.message, [
+                {
+                    text: "OK",
+                    onPress: () => {
+                        setIsRegistering(false); // Reset loading state on error
+                    },
+                },
+            ]);
         }
     };
 
@@ -48,14 +64,20 @@ export default function Register() {
                     autoCapitalize="none"
                 />
 
-                <TouchableOpacity style={styles.button} onPress={register}>
-                    <Text style={styles.buttonText}>Register</Text>
+                <TouchableOpacity style={styles.button} onPress={register} disabled={isRegistering}>
+                    {isRegistering ? (  // Show loader if registering
+                        <View style={styles.loadingContainer}>
+                            <Text style={styles.loggingText}> Registering...</Text>
+                        </View>
+                    ) : (
+                        <Text style={styles.buttonText}>Register</Text>
+                    )}
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => router.push("login")}>
                     <Text style={styles.link}>Already have an account? Login</Text>
                 </TouchableOpacity>
-                
+
             </View>
         </View>
     );
@@ -118,6 +140,16 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         color: "#333",
+    },
+    loadingContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    loggingText: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#333",
+        marginLeft: 5, // Add some space between the icon and text
     },
     link: {
         marginTop: 15,
