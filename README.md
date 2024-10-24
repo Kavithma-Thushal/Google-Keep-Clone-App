@@ -25,32 +25,32 @@ This repository contains the coursework project for **Advanced Mobile Applicatio
 <div align="left" style="display: flex; flex-wrap: wrap; justify-content: center;">
 
   <div style="text-align: center; margin: 10px;">
-    <img src='assets/images/ss/Home.png' alt="Home Screen" width="350"/>
+    <img src='assets/images/ss/Home.png' alt="Home Screen" width="340"/>
     <br/><b>Home Screen</b>
   </div>
 
   <div style="text-align: center; margin: 10px;">
-    <img src='assets/images/ss/Login.png' alt="Login Screen" width="350"/>
+    <img src='assets/images/ss/Login.png' alt="Login Screen" width="340"/>
     <br/><b>Login Screen</b>
   </div>
 
   <div style="text-align: center; margin: 10px;">
-    <img src='assets/images/ss/Register.png' alt="Register Screen" width="350"/>
+    <img src='assets/images/ss/Register.png' alt="Register Screen" width="340"/>
     <br/><b>Register Screen</b>
   </div>
 
   <div style="text-align: center; margin: 10px;">
-    <img src='assets/images/ss/Dashboard.png' alt="Dashboard" width="350"/>
+    <img src='assets/images/ss/Dashboard.png' alt="Dashboard" width="340"/>
     <br/><b>Dashboard</b>
   </div>
 
   <div style="text-align: center; margin: 10px;">
-    <img src='assets/images/ss/ImagePicker.png' alt="Image Picker" width="350"/>
+    <img src='assets/images/ss/ImagePicker.png' alt="Image Picker" width="340"/>
     <br/><b>Image Picker</b>
   </div>
 
   <div style="text-align: center; margin: 10px;">
-    <img src='assets/images/ss/UploadImage.png' alt="Upload Image" width="350"/>
+    <img src='assets/images/ss/UploadImage.png' alt="Upload Image" width="340"/>
     <br/><b>Upload Image</b>
   </div>
 
