@@ -1,1 +1,5 @@
 /.idea
+/Frontend/.expo
+/Frontend/node_modules
+/Backend/.env
+/Backend/node_modules
