@@ -8,32 +8,21 @@ export default function Register() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isRegistering, setIsRegistering] = useState(false); // Add loading state
+    const [isRegistering, setIsRegistering] = useState(false);
 
     const register = async () => {
-        setIsRegistering(true); // Set loading state to true
+        setIsRegistering(true);
+
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            if (userCredential) {
-                Alert.alert("Registration Success", "Account has been created!", [
-                    {
-                        text: "OK",
-                        onPress: () => {
-                            setIsRegistering(false); // Reset loading state here before navigation
-                            router.push("login");
-                        },
-                    },
-                ]);
+            const credentials = await createUserWithEmailAndPassword(auth, email, password);
+            if (credentials) {
+                Alert.alert("Registration Success", "Account has been created!");
+                router.push("login");
             }
         } catch (error) {
-            Alert.alert("Registration Failed", error.message, [
-                {
-                    text: "OK",
-                    onPress: () => {
-                        setIsRegistering(false); // Reset loading state on error
-                    },
-                },
-            ]);
+            Alert.alert("Login Failed", error.message);
+        } finally {
+            setIsRegistering(false);
         }
     };
 
@@ -65,7 +54,7 @@ export default function Register() {
                 />
 
                 <TouchableOpacity style={styles.button} onPress={register} disabled={isRegistering}>
-                    {isRegistering ? (  // Show loader if registering
+                    {isRegistering ? (
                         <View style={styles.loadingContainer}>
                             <Text style={styles.loggingText}> Registering...</Text>
                         </View>
@@ -149,7 +138,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         color: "#333",
-        marginLeft: 5, // Add some space between the icon and text
+        marginLeft: 5,
     },
     link: {
         marginTop: 15,

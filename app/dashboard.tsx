@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import ImagePickerModal from "../components/ImagePickerModal";
-import ImageUploadModal from "../components/ImageUploadModal";
+import ImagePickerModal from "../modals/ImagePickerModal";
+import ImageUploadModal from "../modals/ImageUploadModal";
 
 export default function Dashboard() {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -25,6 +25,7 @@ export default function Dashboard() {
 
     return (
         <View style={styles.container}>
+
             {/* Search Bar */}
             <View style={styles.searchBar}>
                 <MaterialIcons name="menu" size={26} color="black" />
@@ -69,7 +70,7 @@ export default function Dashboard() {
                 image={image}
             />
 
-            {/* Floating Plus Button */}
+            {/* Floating Button */}
             <TouchableOpacity style={styles.floatingButton}>
                 <Image style={styles.fabIcon} source={require("../assets/images/plus_button.png")} />
             </TouchableOpacity>

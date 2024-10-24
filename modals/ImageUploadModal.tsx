@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import {
-    View,
-    Image,
-    StyleSheet,
-    TouchableOpacity,
-    Text,
-    Modal,
-    TouchableWithoutFeedback,
-    Alert,
-    ActivityIndicator,
-} from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity, Text, Modal, TouchableWithoutFeedback, Alert, ActivityIndicator, } from "react-native";
 import { storage } from "../FirebaseConfig";
 import { ref, uploadBytes } from "firebase/storage";
 
@@ -24,7 +14,7 @@ const ImageUploadModal: React.FC<Props> = ({ visible, onClose, image }) => {
 
     const uploadImageToFirebase = async () => {
         if (!image) {
-            Alert.alert("No Image", "Please select an image first.");
+            Alert.alert("No Image", "Please select an image first");
             return;
         }
 
@@ -41,7 +31,7 @@ const ImageUploadModal: React.FC<Props> = ({ visible, onClose, image }) => {
             Alert.alert("Error", "Failed to upload image.");
         } finally {
             setUploading(false);
-            onClose(); // Close the modal after upload is done
+            onClose();
         }
     };
 
@@ -60,9 +50,8 @@ const ImageUploadModal: React.FC<Props> = ({ visible, onClose, image }) => {
                             <TouchableOpacity
                                 style={styles.uploadButton}
                                 onPress={uploadImageToFirebase}
-                                disabled={isUploading} // Disable the button while uploading
-                            >
-                                {isUploading ? (  // Show loader if uploading
+                                disabled={isUploading}>
+                                {isUploading ? (
                                     <View style={styles.loadingContainer}>
                                         <ActivityIndicator size="small" color="#333" />
                                         <Text style={styles.uploadingText}> Uploading...</Text>

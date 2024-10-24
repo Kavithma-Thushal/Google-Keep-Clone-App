@@ -8,21 +8,21 @@ export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggingIn, setIsLoggingIn] = useState(false); // Add loading state
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const login = async () => {
-    setIsLoggingIn(true); // Set loading state to true
+    setIsLoggingIn(true);
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      if (userCredential) {
-        Alert.alert("Login Success", "Logged in Successfully!");
+      const credentials = await signInWithEmailAndPassword(auth, email, password);
+      if (credentials) {
+        Alert.alert("Success", "Login Successfully!");
         router.push("dashboard");
       }
     } catch (error) {
       Alert.alert("Login Failed", error.message);
     } finally {
-      setIsLoggingIn(false); // Reset loading state
+      setIsLoggingIn(false);
     }
   };
 
@@ -54,7 +54,7 @@ export default function Login() {
         />
 
         <TouchableOpacity style={styles.button} onPress={login} disabled={isLoggingIn}>
-          {isLoggingIn ? (  // Show loader if logging in
+          {isLoggingIn ? (
             <View style={styles.loadingContainer}>
               <Text style={styles.loggingText}> Logging...</Text>
             </View>
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "#333",
-    marginLeft: 5, // Add some space between the icon and text
+    marginLeft: 5,
   },
   link: {
     marginTop: 15,
