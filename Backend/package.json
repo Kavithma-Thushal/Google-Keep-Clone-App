@@ -1,0 +1,15 @@
+{
+  "name": "google-keep-clone-app",
+  "version": "1.0.0",
+  "author": "Kavithma Thushal",
+  "license": "GNU",
+  "private": true,
+  "description": "This is the Coursework for Advanced Mobile Application Development in GDSE66 @ijse.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
