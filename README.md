@@ -22,7 +22,7 @@ This repository contains the coursework project for **Advanced Mobile Applicatio
 
 ## 📸 Screenshots
 
-<div align="left" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+<div align="left" style="display: flex; flex-wrap: wrap; justify-content: center;">
 
   <div style="text-align: center; margin: 10px;">
     <img src='assets/images/ss/Home.png' alt="Home Screen" width="350"/>
