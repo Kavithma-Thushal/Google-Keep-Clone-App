@@ -10,13 +10,12 @@ This repository contains the frontend for the **Google Keep Clone App**, a cours
 
 ## 🚀 Features
 
-✅ **User Authentication**: Secure login and registration via Firebase Authentication.</br>
-✅ **Note Creation & Organization**: Users can create, read, update, and delete notes with color-coding options for visual organization. <br>
-✅ **Task Lists**: Add task lists within notes to keep track of to-dos.</br>
-✅ **Reminders**: Set reminders on notes for notifications about important tasks or events.</br>
-✅ **Search Functionality**: Quickly locate notes using a search feature that scans through note content and labels.</br>
-✅ **Media Attachments**: Allow users to attach images to notes, with media stored securely via Firebase Storage.</br>
-✅ **User Profiles**: User profiles store personalized note data, task lists, reminders, and associated media.</br>
+✅ **User Authentication**: Secure login and registration via Firebase Authentication.<br>
+✅ **Note Creation & Organization**: Users can create, read, update, and delete notes with color-coding options for visual organization.<br>
+✅ **Task Lists**: Add task lists within notes to keep track of to-dos.<br>
+✅ **Reminders**: Set reminders on notes for notifications about important tasks or events.<br>
+✅ **Search Functionality**: Quickly locate notes using a search feature that scans through note content and labels.<br>
+✅ **Media Attachments**: Allow users to attach images to notes, with media stored securely via Firebase Storage.<br>
 
 ## 📸 Screenshots
 
