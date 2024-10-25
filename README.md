@@ -6,7 +6,7 @@ This repository contains the frontend for the **Google Keep Clone App**, a cours
 
 ✅ **React Native**: For building the mobile interface.</br>
 ✅ **Expo**: Streamlines React Native development and deployment.</br>
-✅ **Firebase**: Provides secure authentication and media storage for note attachments.</br>
+✅ **Firebase**: Provides secure authentication and media storage.</br>
 
 ## 🚀 Features
 
