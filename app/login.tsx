@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert} from "react-native";
-import {useRouter} from "expo-router";
-import {auth} from "../FirebaseConfig";
-import {signInWithEmailAndPassword} from "firebase/auth";
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { useRouter } from "expo-router";
+import { auth } from "../FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
     const router = useRouter();
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 5,
-        shadowOffset: {width: 0, height: 4},
+        shadowOffset: { width: 0, height: 4 },
         elevation: 5,
     },
     title: {
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 5,
-        shadowOffset: {width: 0, height: 4},
+        shadowOffset: { width: 0, height: 4 },
         elevation: 3,
     },
     buttonText: {

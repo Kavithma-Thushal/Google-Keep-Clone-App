@@ -1,6 +1,6 @@
 import React from "react";
-import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
-import {useRouter} from "expo-router";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
 
 export default function Home() {
     const router = useRouter();
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 5,
-        shadowOffset: {width: 0, height: 4},
+        shadowOffset: { width: 0, height: 4 },
         elevation: 3,
     },
     buttonText: {

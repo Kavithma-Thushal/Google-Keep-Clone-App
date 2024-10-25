@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {View, Text, StyleSheet, TouchableOpacity, Image} from "react-native";
-import {MaterialIcons} from "@expo/vector-icons";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import ImagePickerModal from "../models/ImagePickerModel";
 import ImageUploadModal from "../models/ImageUploadModel";
 
@@ -28,31 +28,31 @@ export default function Dashboard() {
 
             {/* Search Bar */}
             <View style={styles.searchBar}>
-                <MaterialIcons name="menu" size={26} color="black"/>
+                <MaterialIcons name="menu" size={26} color="black" />
                 <Text style={styles.searchText}>Search your notes</Text>
-                <MaterialIcons name="view-module" size={26} color="black"/>
-                <Image style={styles.profileIcon} source={require("../assets/images/profile.png")}/>
+                <MaterialIcons name="view-module" size={26} color="black" />
+                <Image style={styles.profileIcon} source={require("../assets/images/profile.png")} />
             </View>
 
             {/* Empty State */}
             <View style={styles.emptyState}>
-                <MaterialIcons name="lightbulb-outline" size={100} color="#fbbc04"/>
+                <MaterialIcons name="lightbulb-outline" size={100} color="#fbbc04" />
                 <Text style={styles.emptyText}>Notes you add appear here</Text>
             </View>
 
             {/* Bottom Toolbar */}
             <View style={styles.bottomToolbar}>
                 <TouchableOpacity style={styles.toolbarButton}>
-                    <MaterialIcons name="check-box" size={25} color="gray"/>
+                    <MaterialIcons name="check-box" size={25} color="gray" />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.toolbarButton}>
-                    <MaterialIcons name="brush" size={25} color="gray"/>
+                    <MaterialIcons name="brush" size={25} color="gray" />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.toolbarButton}>
-                    <MaterialIcons name="mic" size={25} color="gray"/>
+                    <MaterialIcons name="mic" size={25} color="gray" />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.toolbarButton} onPress={toggleModal}>
-                    <MaterialIcons name="image" size={25} color="gray"/>
+                    <MaterialIcons name="image" size={25} color="gray" />
                 </TouchableOpacity>
             </View>
 
@@ -72,7 +72,7 @@ export default function Dashboard() {
 
             {/* Floating Button */}
             <TouchableOpacity style={styles.floatingButton}>
-                <Image style={styles.fabIcon} source={require("../assets/images/plus_button.png")}/>
+                <Image style={styles.fabIcon} source={require("../assets/images/plus_button.png")} />
             </TouchableOpacity>
         </View>
     );

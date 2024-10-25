@@ -1,6 +1,6 @@
 import React from "react";
-import {View, Text, StyleSheet, TouchableOpacity, Modal, TouchableWithoutFeedback} from "react-native";
-import {MaterialIcons} from "@expo/vector-icons";
+import { View, Text, StyleSheet, TouchableOpacity, Modal, TouchableWithoutFeedback } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
     onImageSelected: (image: string) => void;
 };
 
-const ImagePickerModal: React.FC<Props> = ({visible, onClose, onImageSelected}) => {
+const ImagePickerModal: React.FC<Props> = ({ visible, onClose, onImageSelected }) => {
     const pickImage = async () => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -44,11 +44,11 @@ const ImagePickerModal: React.FC<Props> = ({visible, onClose, onImageSelected}) 
                         <View style={styles.modalView}>
                             <Text style={styles.modalText}>Add Image</Text>
                             <TouchableOpacity style={styles.modalButton}>
-                                <MaterialIcons name="camera-alt" size={24} color="black"/>
+                                <MaterialIcons name="camera-alt" size={24} color="black" />
                                 <Text style={styles.modalButtonText}>Take Photo</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.modalButton} onPress={pickImage}>
-                                <MaterialIcons name="photo" size={24} color="black"/>
+                                <MaterialIcons name="photo" size={24} color="black" />
                                 <Text style={styles.modalButtonText}>Choose Image</Text>
                             </TouchableOpacity>
                         </View>

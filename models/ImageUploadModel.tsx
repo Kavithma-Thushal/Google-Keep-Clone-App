@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
     View,
     Image,
@@ -10,8 +10,8 @@ import {
     Alert,
     ActivityIndicator,
 } from "react-native";
-import {storage} from "../FirebaseConfig";
-import {ref, uploadBytes} from "firebase/storage";
+import { storage } from "../FirebaseConfig";
+import { ref, uploadBytes } from "firebase/storage";
 
 type Props = {
     visible: boolean;
@@ -19,7 +19,7 @@ type Props = {
     image: string | null;
 };
 
-const ImageUploadModal: React.FC<Props> = ({visible, onClose, image}) => {
+const ImageUploadModal: React.FC<Props> = ({ visible, onClose, image }) => {
     const [isUploading, setUploading] = useState(false);
 
     const uploadImageToFirebase = async () => {
@@ -57,14 +57,14 @@ const ImageUploadModal: React.FC<Props> = ({visible, onClose, image}) => {
                     <TouchableWithoutFeedback onPress={() => {
                     }}>
                         <View style={styles.modalViewNoBorder}>
-                            {image && <Image source={{uri: image}} style={styles.selectedImageLarge}/>}
+                            {image && <Image source={{ uri: image }} style={styles.selectedImageLarge} />}
                             <TouchableOpacity
                                 style={styles.uploadButton}
                                 onPress={uploadImageToFirebase}
                                 disabled={isUploading}>
                                 {isUploading ? (
                                     <View style={styles.loadingContainer}>
-                                        <ActivityIndicator size="small" color="#333"/>
+                                        <ActivityIndicator size="small" color="#333" />
                                         <Text style={styles.uploadingText}> Uploading...</Text>
                                     </View>
                                 ) : (
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 5,
-        shadowOffset: {width: 0, height: 4},
+        shadowOffset: { width: 0, height: 4 },
         elevation: 3,
         width: "50%",
     },
