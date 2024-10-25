@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {View, Text, StyleSheet, TouchableOpacity, Image} from "react-native";
 import {MaterialIcons} from "@expo/vector-icons";
-import ImagePickerModal from "../modals/ImagePickerModal";
-import ImageUploadModal from "../modals/ImageUploadModal";
+import ImagePickerModal from "../models/ImagePickerModel";
+import ImageUploadModal from "../models/ImageUploadModel";
 
 export default function Dashboard() {
     const [isModalVisible, setModalVisible] = useState(false);
