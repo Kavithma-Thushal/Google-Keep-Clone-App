@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Modal } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import ImagePickerModal from "../models/ImagePickerModel";
-import ImageUploadModal from "../models/ImageUploadModel";
+import ImagePicker from "../models/ImagePicker";
+import ImageUpload from "../models/ImageUpload";
+import NoteCreation from "../models/NoteCreation";
 
 export default function Dashboard() {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isImagePreviewVisible, setImagePreviewVisible] = useState(false);
     const [image, setImage] = useState<string | null>(null);
+    const [isCreateNoteModalVisible, setCreateNoteModalVisible] = useState(false);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -21,6 +23,10 @@ export default function Dashboard() {
         setImage(selectedImage);
         toggleImagePreview();
         toggleModal();
+    };
+
+    const toggleCreateNoteModal = () => {
+        setCreateNoteModalVisible(!isCreateNoteModalVisible);
     };
 
     return (
@@ -57,21 +63,31 @@ export default function Dashboard() {
             </View>
 
             {/* Image Picker Modal */}
-            <ImagePickerModal
+            <ImagePicker
                 visible={isModalVisible}
                 onClose={toggleModal}
                 onImageSelected={handleImageSelected}
             />
 
             {/* Image Upload Modal */}
-            <ImageUploadModal
+            <ImageUpload
                 visible={isImagePreviewVisible}
                 onClose={toggleImagePreview}
                 image={image}
             />
 
+            {/* Create Note Modal */}
+            <Modal visible={isCreateNoteModalVisible} animationType="slide" transparent={true}>
+                <View style={styles.modalContainer}>
+                    <NoteCreation navigation={{ goBack: toggleCreateNoteModal }} />
+                    <TouchableOpacity style={styles.closeButton} onPress={toggleCreateNoteModal}>
+                        <Text style={styles.closeButtonText}>Close</Text>
+                    </TouchableOpacity>
+                </View>
+            </Modal>
+
             {/* Floating Button */}
-            <TouchableOpacity style={styles.floatingButton}>
+            <TouchableOpacity style={styles.floatingButton} onPress={toggleCreateNoteModal}>
                 <Image style={styles.fabIcon} source={require("../assets/images/plus_button.png")} />
             </TouchableOpacity>
         </View>
@@ -148,5 +164,21 @@ const styles = StyleSheet.create({
     fabIcon: {
         width: 40,
         height: 40,
+    },
+    modalContainer: {
+        flex: 1,
+        backgroundColor: 'white',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        overflow: 'hidden',
+    },
+    closeButton: {
+        padding: 10,
+        alignItems: 'center',
+        backgroundColor: '#f0f0f0',
+    },
+    closeButtonText: {
+        color: '#000',
+        fontSize: 16,
     },
 });
