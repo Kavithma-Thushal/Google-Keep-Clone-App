@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { useRouter } from "expo-router";
@@ -15,12 +16,22 @@ export default function Register() {
 
         try {
             const credentials = await createUserWithEmailAndPassword(auth, email, password);
-            if (credentials) {
-                Alert.alert("Registration Success", "Account has been created!");
-                router.push("login");
-            }
+            const firebaseUserId = credentials.user.uid;
+
+            const user = {
+                firebaseUserId,
+                email,
+                password
+            };
+
+            await axios.post(`http://192.168.50.208:8080/api/v1/user/register`, user, {
+                headers: { "Content-Type": "application/json" },
+            });
+
+            Alert.alert("Registration Success", "User has been registered!");
+            router.push("login");
         } catch (error) {
-            Alert.alert("Login Failed", error.message);
+            Alert.alert("Registration Failed", error.message);
         } finally {
             setIsRegistering(false);
         }
