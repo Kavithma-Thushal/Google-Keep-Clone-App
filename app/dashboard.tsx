@@ -80,9 +80,6 @@ export default function Dashboard() {
             <Modal visible={isCreateNoteModalVisible} animationType="slide" transparent={true}>
                 <View style={styles.modalContainer}>
                     <NoteCreation navigation={{ goBack: toggleCreateNoteModal }} />
-                    <TouchableOpacity style={styles.closeButton} onPress={toggleCreateNoteModal}>
-                        <Text style={styles.closeButtonText}>Close</Text>
-                    </TouchableOpacity>
                 </View>
             </Modal>
 
@@ -171,14 +168,5 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         overflow: 'hidden',
-    },
-    closeButton: {
-        padding: 10,
-        alignItems: 'center',
-        backgroundColor: '#f0f0f0',
-    },
-    closeButtonText: {
-        color: '#000',
-        fontSize: 16,
     },
 });
