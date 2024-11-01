@@ -3,14 +3,20 @@ import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-nativ
 import { MaterialIcons } from '@expo/vector-icons';
 import ImagePicker from "../models/ImagePicker2";
 import ImageUpload from "../models/ImageUpload2";
+import ColorPalette from "./ColorPalette";
 
 export default function CreateNoteScreen({ navigation }) {
     const [isModalVisible, setModalVisible] = useState(false);
+    const [isPaletteVisible, setPaletteVisible] = useState(false);
     const [isImagePreviewVisible, setImagePreviewVisible] = useState(false);
     const [image, setImage] = useState<string | null>(null);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
+    };
+
+    const togglePalette = () => {
+        setPaletteVisible(!isPaletteVisible);
     };
 
     const toggleImagePreview = () => {
@@ -21,6 +27,11 @@ export default function CreateNoteScreen({ navigation }) {
         setImage(selectedImage);
         toggleImagePreview();
         toggleModal();
+    };
+
+    const handleColorSelected = (color: string) => {
+        console.log("Selected color or background:", color);
+        togglePalette();
     };
 
     return (
@@ -63,7 +74,7 @@ export default function CreateNoteScreen({ navigation }) {
                 <TouchableOpacity style={styles.toolbarButton} onPress={toggleModal}>
                     <MaterialIcons name="add-box" size={24} color="#666" />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.toolbarButton}>
+                <TouchableOpacity style={styles.toolbarButton} onPress={togglePalette}>
                     <MaterialIcons name="palette" size={24} color="#666" />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.toolbarButton}>
@@ -89,6 +100,12 @@ export default function CreateNoteScreen({ navigation }) {
                 image={image}
             />
 
+            {/* Color Palette Modal */}
+            <ColorPalette
+                visible={isPaletteVisible}
+                onClose={togglePalette}
+                onColorSelected={handleColorSelected}
+            />
         </View>
     );
 }
