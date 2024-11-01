@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import { auth } from "../FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -61,6 +61,7 @@ export default function Login() {
                 >
                     {isLoggingIn ? (
                         <View style={styles.loadingContainer}>
+                            <ActivityIndicator size="small" color="#333" />
                             <Text style={styles.loggingText}> Logging...</Text>
                         </View>
                     ) : (

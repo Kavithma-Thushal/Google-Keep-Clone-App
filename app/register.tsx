@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import { auth } from "../FirebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -64,14 +64,14 @@ export default function Register() {
                     autoCapitalize="none"
                 />
 
-                {/* Disable the button during registration by adding `disabled={isRegistering}` and applying a dimmed style */}
                 <TouchableOpacity
-                    style={[styles.button, isRegistering && styles.buttonDisabled]} // Apply buttonDisabled style when registering
+                    style={[styles.button, isRegistering && styles.buttonDisabled]}
                     onPress={register}
-                    disabled={isRegistering} // Disable button when registering
+                    disabled={isRegistering}
                 >
                     {isRegistering ? (
                         <View style={styles.loadingContainer}>
+                            <ActivityIndicator size="small" color="#333" />
                             <Text style={styles.loggingText}> Registering...</Text>
                         </View>
                     ) : (
