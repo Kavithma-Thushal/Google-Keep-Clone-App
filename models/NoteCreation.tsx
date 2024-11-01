@@ -49,7 +49,7 @@ export default function CreateNoteScreen({ navigation }) {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: color }]}>
             {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     saveButtonText: {
-        color: "#fff",
+        color: "#000",
         fontSize: 16,
         fontWeight: "bold",
     },

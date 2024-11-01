@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, TouchableWithoutFeedback, ScrollView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 
 type Props = {
     visible: boolean;
