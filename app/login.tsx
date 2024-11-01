@@ -11,7 +11,7 @@ export default function Login() {
     const [isLoggingIn, setIsLoggingIn] = useState(false);
 
     const login = async () => {
-        setIsLoggingIn(true);
+        setIsLoggingIn(true); // Disable button when login starts
 
         try {
             const credentials = await signInWithEmailAndPassword(auth, email, password);
@@ -22,7 +22,7 @@ export default function Login() {
         } catch (error) {
             Alert.alert("Login Failed", error.message);
         } finally {
-            setIsLoggingIn(false);
+            setIsLoggingIn(false); // Enable button after login process completes
         }
     };
 
@@ -53,7 +53,12 @@ export default function Login() {
                     autoCapitalize="none"
                 />
 
-                <TouchableOpacity style={styles.button} onPress={login} disabled={isLoggingIn}>
+                {/* Disable the button during login by adding `disabled={isLoggingIn}` and applying a dimmed style */}
+                <TouchableOpacity
+                    style={[styles.button, isLoggingIn && styles.buttonDisabled]} // Apply buttonDisabled style when logging in
+                    onPress={login}
+                    disabled={isLoggingIn} // Disable button when logging in
+                >
                     {isLoggingIn ? (
                         <View style={styles.loadingContainer}>
                             <Text style={styles.loggingText}> Logging...</Text>
@@ -124,6 +129,10 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 4 },
         elevation: 3,
+    },
+    buttonDisabled: {
+        backgroundColor: "#f3b82a", // Dimmed color for disabled button
+        opacity: 0.7, // Slight transparency to show it's disabled
     },
     buttonText: {
         fontSize: 16,

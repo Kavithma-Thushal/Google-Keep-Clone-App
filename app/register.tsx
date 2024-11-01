@@ -12,7 +12,7 @@ export default function Register() {
     const [isRegistering, setIsRegistering] = useState(false);
 
     const register = async () => {
-        setIsRegistering(true);
+        setIsRegistering(true); // Disable button when registration starts
 
         try {
             const credentials = await createUserWithEmailAndPassword(auth, email, password);
@@ -33,7 +33,7 @@ export default function Register() {
         } catch (error) {
             Alert.alert("Registration Failed", error.message);
         } finally {
-            setIsRegistering(false);
+            setIsRegistering(false); // Enable button after registration process completes
         }
     };
 
@@ -64,7 +64,12 @@ export default function Register() {
                     autoCapitalize="none"
                 />
 
-                <TouchableOpacity style={styles.button} onPress={register} disabled={isRegistering}>
+                {/* Disable the button during registration by adding `disabled={isRegistering}` and applying a dimmed style */}
+                <TouchableOpacity
+                    style={[styles.button, isRegistering && styles.buttonDisabled]} // Apply buttonDisabled style when registering
+                    onPress={register}
+                    disabled={isRegistering} // Disable button when registering
+                >
                     {isRegistering ? (
                         <View style={styles.loadingContainer}>
                             <Text style={styles.loggingText}> Registering...</Text>
@@ -135,6 +140,10 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: 0, height: 4 },
         elevation: 3,
+    },
+    buttonDisabled: {
+        backgroundColor: "#f3b82a", // Dimmed color for disabled button
+        opacity: 0.7, // Slight transparency to show it's disabled
     },
     buttonText: {
         fontSize: 16,
