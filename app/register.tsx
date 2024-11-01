@@ -24,7 +24,7 @@ export default function Register() {
                 password
             };
 
-            await axios.post(`http://192.168.50.208:8080/api/v1/user/register`, user, {
+            await axios.post(`http://192.168.168.208:8080/api/v1/user/register`, user, {
                 headers: { "Content-Type": "application/json" },
             });
 

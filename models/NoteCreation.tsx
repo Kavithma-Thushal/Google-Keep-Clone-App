@@ -4,21 +4,22 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 export default function CreateNoteScreen({ navigation }) {
     return (
+
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <MaterialIcons name="arrow-back" size={24} color="black" />
+                    <MaterialIcons name="arrow-back" size={24} color="#666" />
                 </TouchableOpacity>
                 <View style={styles.headerActions}>
                     <TouchableOpacity style={styles.headerButton}>
-                        <MaterialIcons name="notification-add" size={24} color="black" />
+                        <MaterialIcons name="push-pin" size={24} color="#666" />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.headerButton}>
-                        <MaterialIcons name="archive" size={24} color="black" />
+                        <MaterialIcons name="notification-add" size={24} color="#666" />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.headerButton}>
-                        <MaterialIcons name="file-download" size={24} color="black" />
+                        <MaterialIcons name="archive" size={24} color="#666" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -68,8 +69,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: '#f0f0f0',
     },
     headerActions: {
         flexDirection: 'row',
@@ -85,12 +84,12 @@ const styles = StyleSheet.create({
     titleInput: {
         fontSize: 24,
         fontWeight: '500',
-        marginBottom: 16,
-        color: '#000',
+        marginBottom: 8,
+        color: '#666',
     },
     noteInput: {
         fontSize: 16,
-        color: '#000',
+        color: '#666',
         textAlignVertical: 'top',
     },
     bottomToolbar: {
@@ -98,7 +97,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 16,
         borderTopWidth: 1,
-        borderTopColor: '#f0f0f0',
+        borderTopColor: '#e0e0e0',
     },
     toolbarButton: {
         marginRight: 24,
@@ -107,6 +106,7 @@ const styles = StyleSheet.create({
         flex: 1,
         color: '#666',
         fontSize: 14,
+        textAlign: 'center',
     },
     moreButton: {
         marginLeft: 8,
