@@ -16,12 +16,11 @@ export default function Register() {
 
         try {
             const credentials = await createUserWithEmailAndPassword(auth, email, password);
-            const firebaseUserId = credentials.user.uid;
+            const userId = credentials.user.uid;
 
             const user = {
-                firebaseUserId,
-                email,
-                password
+                userId,
+                email
             };
 
             await axios.post(`http://192.168.168.208:8080/api/v1/user/register`, user, {

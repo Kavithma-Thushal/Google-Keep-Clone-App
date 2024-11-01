@@ -4,16 +4,18 @@ import { MaterialIcons } from '@expo/vector-icons';
 import ImagePicker from "../models/ImagePicker2";
 import ImageUpload from "../models/ImageUpload2";
 import ColorPalette from "./ColorPalette";
-import saveNote from "../utils/SaveNote"; // Import saveNote function
+import saveNote from "../utils/SaveNote";
+import { auth } from '../FirebaseConfig';
 
 export default function CreateNoteScreen({ navigation }) {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isPaletteVisible, setPaletteVisible] = useState(false);
     const [isImagePreviewVisible, setImagePreviewVisible] = useState(false);
     const [image, setImage] = useState<string | null>(null);
-    const [title, setTitle] = useState(""); // New state for title
-    const [content, setContent] = useState(""); // New state for content
-    const [color, setColor] = useState("#ffffff"); // New state for selected color
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [color, setColor] = useState("#ffffff");
+    const [username, setUsername] = useState(""); // New state for username
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -40,9 +42,18 @@ export default function CreateNoteScreen({ navigation }) {
 
     const handleSaveNote = async () => {
         try {
-            await saveNote({ title, content, color });
-            Alert.alert("Success", "Note saved successfully!");
-            navigation.goBack();
+            const user = auth.currentUser; // Assuming `auth` is the firebase auth instance
+
+            if (user) {
+                const userId = user.uid; // Get the firebase user ID
+                const username = user.email; // Use the user's email as the username
+
+                await saveNote({ title, content, color, username }); // Include username in the saveNote function
+                Alert.alert("Success", "Note saved successfully!");
+                navigation.goBack();
+            } else {
+                Alert.alert("Error", "User not authenticated");
+            }
         } catch (error) {
             Alert.alert("Error", "Failed to save note");
         }
@@ -75,7 +86,7 @@ export default function CreateNoteScreen({ navigation }) {
                     placeholder="Title"
                     placeholderTextColor="#999"
                     value={title}
-                    onChangeText={setTitle} // Update title state
+                    onChangeText={setTitle}
                 />
                 <TextInput
                     style={styles.noteInput}
@@ -83,7 +94,7 @@ export default function CreateNoteScreen({ navigation }) {
                     placeholderTextColor="#999"
                     multiline
                     value={content}
-                    onChangeText={setContent} // Update content state
+                    onChangeText={setContent}
                 />
             </View>
 
@@ -165,6 +176,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#666',
         textAlignVertical: 'top',
+    },
+    usernameInput: {
+        fontSize: 16,
+        color: '#666',
+        marginTop: 8,
+        marginBottom: 8,
     },
     saveButton: {
         backgroundColor: "#fbbc04",
