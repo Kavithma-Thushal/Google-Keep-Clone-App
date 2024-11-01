@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import ImagePicker from "../models/ImagePicker2";
+import ImageUpload from "../models/ImageUpload2";
 
 export default function CreateNoteScreen({ navigation }) {
-    return (
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [isImagePreviewVisible, setImagePreviewVisible] = useState(false);
+    const [image, setImage] = useState<string | null>(null);
 
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
+
+    const toggleImagePreview = () => {
+        setImagePreviewVisible(!isImagePreviewVisible);
+    };
+
+    const handleImageSelected = (selectedImage: string) => {
+        setImage(selectedImage);
+        toggleImagePreview();
+        toggleModal();
+    };
+
+    return (
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
@@ -41,7 +60,7 @@ export default function CreateNoteScreen({ navigation }) {
 
             {/* Bottom Toolbar */}
             <View style={styles.bottomToolbar}>
-                <TouchableOpacity style={styles.toolbarButton}>
+                <TouchableOpacity style={styles.toolbarButton} onPress={toggleModal}>
                     <MaterialIcons name="add-box" size={24} color="#666" />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.toolbarButton}>
@@ -55,6 +74,21 @@ export default function CreateNoteScreen({ navigation }) {
                     <MaterialIcons name="more-vert" size={24} color="#666" />
                 </TouchableOpacity>
             </View>
+
+            {/* Image Picker Modal */}
+            <ImagePicker
+                visible={isModalVisible}
+                onClose={toggleModal}
+                onImageSelected={handleImageSelected}
+            />
+
+            {/* Image Upload Modal */}
+            <ImageUpload
+                visible={isImagePreviewVisible}
+                onClose={toggleImagePreview}
+                image={image}
+            />
+
         </View>
     );
 }
