@@ -15,18 +15,7 @@ export default function Register() {
         setIsRegistering(true); // Disable button when registration starts
 
         try {
-            const credentials = await createUserWithEmailAndPassword(auth, email, password);
-            const userId = credentials.user.uid;
-
-            const user = {
-                userId,
-                email
-            };
-
-            await axios.post(`http://192.168.168.208:8080/api/v1/user/register`, user, {
-                headers: { "Content-Type": "application/json" },
-            });
-
+            await createUserWithEmailAndPassword(auth, email, password);
             Alert.alert("Registration Success", "User has been registered!");
             router.push("login");
         } catch (error) {
