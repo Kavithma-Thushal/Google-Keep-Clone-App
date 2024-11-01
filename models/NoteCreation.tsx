@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import ImagePicker from "../models/ImagePicker2";
 import ImageUpload from "../models/ImageUpload2";
 import ColorPalette from "./ColorPalette";
+import saveNote from "../utils/SaveNote"; // Import saveNote function
 
 export default function CreateNoteScreen({ navigation }) {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isPaletteVisible, setPaletteVisible] = useState(false);
     const [isImagePreviewVisible, setImagePreviewVisible] = useState(false);
     const [image, setImage] = useState<string | null>(null);
+    const [title, setTitle] = useState(""); // New state for title
+    const [content, setContent] = useState(""); // New state for content
+    const [color, setColor] = useState("#ffffff"); // New state for selected color
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -29,9 +33,19 @@ export default function CreateNoteScreen({ navigation }) {
         toggleModal();
     };
 
-    const handleColorSelected = (color: string) => {
-        console.log("Selected color or background:", color);
+    const handleColorSelected = (selectedColor: string) => {
+        setColor(selectedColor); // Set the selected color
         togglePalette();
+    };
+
+    const handleSaveNote = async () => {
+        try {
+            await saveNote({ title, content, color });
+            Alert.alert("Success", "Note saved successfully!");
+            navigation.goBack();
+        } catch (error) {
+            Alert.alert("Error", "Failed to save note");
+        }
     };
 
     return (
@@ -60,14 +74,23 @@ export default function CreateNoteScreen({ navigation }) {
                     style={styles.titleInput}
                     placeholder="Title"
                     placeholderTextColor="#999"
+                    value={title}
+                    onChangeText={setTitle} // Update title state
                 />
                 <TextInput
                     style={styles.noteInput}
                     placeholder="Note"
                     placeholderTextColor="#999"
                     multiline
+                    value={content}
+                    onChangeText={setContent} // Update content state
                 />
             </View>
+
+            {/* Save Button */}
+            <TouchableOpacity style={styles.saveButton} onPress={handleSaveNote}>
+                <Text style={styles.saveButtonText}>Save Note</Text>
+            </TouchableOpacity>
 
             {/* Bottom Toolbar */}
             <View style={styles.bottomToolbar}>
@@ -142,6 +165,23 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#666',
         textAlignVertical: 'top',
+    },
+    saveButton: {
+        backgroundColor: "#fbbc04",
+        paddingVertical: 12,
+        borderRadius: 8,
+        alignItems: "center",
+        margin: 16,
+        shadowColor: "#000",
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 3,
+    },
+    saveButtonText: {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "bold",
     },
     bottomToolbar: {
         flexDirection: 'row',
