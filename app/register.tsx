@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
@@ -9,19 +8,25 @@ export default function Register() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isRegistering, setIsRegistering] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [registerButton, setRegisterButton] = useState(false);
 
     const register = async () => {
-        setIsRegistering(true); // Disable button when registration starts
+        if (password !== confirmPassword) {
+            Alert.alert("Error", "Passwords do not match!");
+            return;
+        }
+
+        setRegisterButton(true);
 
         try {
             await createUserWithEmailAndPassword(auth, email, password);
-            Alert.alert("Registration Success", "User has been registered!");
+            Alert.alert("Registration Success", "User has been registered successfully!");
             router.push("login");
         } catch (error) {
             Alert.alert("Registration Failed", error.message);
         } finally {
-            setIsRegistering(false); // Enable button after registration process completes
+            setRegisterButton(false);
         }
     };
 
@@ -52,12 +57,22 @@ export default function Register() {
                     autoCapitalize="none"
                 />
 
+                <TextInput
+                    style={styles.input}
+                    placeholder="Confirm password"
+                    placeholderTextColor="#aaa"
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
+                    secureTextEntry
+                    autoCapitalize="none"
+                />
+
                 <TouchableOpacity
-                    style={[styles.button, isRegistering && styles.buttonDisabled]}
+                    style={[styles.button, registerButton && styles.buttonDisabled]}
                     onPress={register}
-                    disabled={isRegistering}
+                    disabled={registerButton}
                 >
-                    {isRegistering ? (
+                    {registerButton ? (
                         <View style={styles.loadingContainer}>
                             <ActivityIndicator size="small" color="#333" />
                             <Text style={styles.loggingText}> Registering...</Text>
@@ -130,8 +145,8 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     buttonDisabled: {
-        backgroundColor: "#f3b82a", // Dimmed color for disabled button
-        opacity: 0.7, // Slight transparency to show it's disabled
+        backgroundColor: "#f3b82a",
+        opacity: 0.7,
     },
     buttonText: {
         fontSize: 16,

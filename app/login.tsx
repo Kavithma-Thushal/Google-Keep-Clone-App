@@ -8,21 +8,21 @@ export default function Login() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isLoggingIn, setIsLoggingIn] = useState(false);
+    const [loginButton, setLoginButton] = useState(false);
 
     const login = async () => {
-        setIsLoggingIn(true); // Disable button when login starts
+        setLoginButton(true);
 
         try {
             const credentials = await signInWithEmailAndPassword(auth, email, password);
             if (credentials) {
-                Alert.alert("Success", "Login Successfully!");
+                Alert.alert("Login Success", "User Logged in Successfully!");
                 router.push("dashboard");
             }
         } catch (error) {
             Alert.alert("Login Failed", error.message);
         } finally {
-            setIsLoggingIn(false); // Enable button after login process completes
+            setLoginButton(false);
         }
     };
 
@@ -53,13 +53,12 @@ export default function Login() {
                     autoCapitalize="none"
                 />
 
-                {/* Disable the button during login by adding `disabled={isLoggingIn}` and applying a dimmed style */}
                 <TouchableOpacity
-                    style={[styles.button, isLoggingIn && styles.buttonDisabled]} // Apply buttonDisabled style when logging in
+                    style={[styles.button, loginButton && styles.buttonDisabled]}
                     onPress={login}
-                    disabled={isLoggingIn} // Disable button when logging in
+                    disabled={loginButton}
                 >
-                    {isLoggingIn ? (
+                    {loginButton ? (
                         <View style={styles.loadingContainer}>
                             <ActivityIndicator size="small" color="#333" />
                             <Text style={styles.loggingText}> Logging...</Text>
@@ -132,8 +131,8 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     buttonDisabled: {
-        backgroundColor: "#f3b82a", // Dimmed color for disabled button
-        opacity: 0.7, // Slight transparency to show it's disabled
+        backgroundColor: "#f3b82a",
+        opacity: 0.7,
     },
     buttonText: {
         fontSize: 16,

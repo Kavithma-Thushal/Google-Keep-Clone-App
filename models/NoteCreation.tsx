@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { auth } from '../FirebaseConfig';
 import ImagePicker from "../models/ImagePicker2";
 import ImageUpload from "../models/ImageUpload2";
 import ColorPalette from "./ColorPalette";
 import saveNote from "../utils/SaveNote";
-import { auth } from '../FirebaseConfig';
 
 export default function CreateNoteScreen({ navigation }) {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -15,7 +15,6 @@ export default function CreateNoteScreen({ navigation }) {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [color, setColor] = useState("#ffffff");
-    const [username, setUsername] = useState(""); // New state for username
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -36,23 +35,21 @@ export default function CreateNoteScreen({ navigation }) {
     };
 
     const handleColorSelected = (selectedColor: string) => {
-        setColor(selectedColor); // Set the selected color
+        setColor(selectedColor);
         togglePalette();
     };
 
     const handleSaveNote = async () => {
         try {
-            const user = auth.currentUser; // Assuming `auth` is the firebase auth instance
+            const user = auth.currentUser;
 
             if (user) {
-                const userId = user.uid; // Get the firebase user ID
-                const username = user.email; // Use the user's email as the username
-
-                await saveNote({ title, content, color, username }); // Include username in the saveNote function
+                const username = user.email;
+                await saveNote({ title, content, color, username });
                 Alert.alert("Success", "Note saved successfully!");
                 navigation.goBack();
             } else {
-                Alert.alert("Error", "User not authenticated");
+                Alert.alert("Error", "User not authenticated!");
             }
         } catch (error) {
             Alert.alert("Error", "Failed to save note");
@@ -61,6 +58,7 @@ export default function CreateNoteScreen({ navigation }) {
 
     return (
         <View style={[styles.container, { backgroundColor: color }]}>
+
             {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>

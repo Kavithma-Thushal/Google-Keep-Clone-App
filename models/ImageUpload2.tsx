@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import {
-    View,
-    Image,
-    StyleSheet,
-    TouchableOpacity,
-    Text,
-    Modal,
-    TouchableWithoutFeedback,
-    Alert,
-    ActivityIndicator,
-} from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity, Text, Modal, TouchableWithoutFeedback, Alert, ActivityIndicator, } from "react-native";
 import { storage } from "../FirebaseConfig";
 import { ref, uploadBytes } from "firebase/storage";
 
@@ -20,7 +10,7 @@ type Props = {
 };
 
 const ImageUploadModal: React.FC<Props> = ({ visible, onClose, image }) => {
-    const [isUploading, setUploading] = useState(false);
+    const [uploadButton, setUploadButton] = useState(false);
 
     const uploadImageToFirebase = async () => {
         if (!image) {
@@ -28,7 +18,7 @@ const ImageUploadModal: React.FC<Props> = ({ visible, onClose, image }) => {
             return;
         }
 
-        setUploading(true);
+        setUploadButton(true);
 
         try {
             const response = await fetch(image);
@@ -40,7 +30,7 @@ const ImageUploadModal: React.FC<Props> = ({ visible, onClose, image }) => {
         } catch (error) {
             Alert.alert("Error", "Failed to upload image.");
         } finally {
-            setUploading(false);
+            setUploadButton(false);
             onClose();
         }
     };
@@ -59,10 +49,10 @@ const ImageUploadModal: React.FC<Props> = ({ visible, onClose, image }) => {
                         <View style={styles.modalViewNoBorder}>
                             {image && <Image source={{ uri: image }} style={styles.selectedImageLarge} />}
                             <TouchableOpacity
-                                style={styles.uploadButton}
+                                style={[styles.uploadButton, uploadButton && styles.buttonDisabled]}
                                 onPress={uploadImageToFirebase}
-                                disabled={isUploading}>
-                                {isUploading ? (
+                                disabled={uploadButton}>
+                                {uploadButton ? (
                                     <View style={styles.loadingContainer}>
                                         <ActivityIndicator size="small" color="#333" />
                                         <Text style={styles.uploadingText}> Uploading...</Text>
@@ -108,6 +98,10 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 4 },
         elevation: 3,
         width: "50%",
+    },
+    buttonDisabled: {
+        backgroundColor: "#f3b82a",
+        opacity: 0.7,
     },
     uploadButtonText: {
         fontSize: 16,
