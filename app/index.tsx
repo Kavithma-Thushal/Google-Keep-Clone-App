@@ -9,7 +9,7 @@ export default function Home() {
         <View style={styles.container}>
             <Text style={styles.title}>Welcome to Google Keep!</Text>
 
-            <TouchableOpacity style={styles.button} onPress={() => router.push("login")}>
+            <TouchableOpacity style={styles.button} onPress={() => router.push("screens/login")}>
                 <Text style={styles.buttonText}>Let's Go</Text>
             </TouchableOpacity>
         </View>

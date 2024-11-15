@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image, Modal } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import ImagePicker from "../models/ImagePicker";
-import ImageUpload from "../models/ImageUpload";
-import NoteCreation from "../models/NoteCreation";
+import ImagePicker from "../../models/ImagePicker";
+import ImageUpload from "../../models/ImageUpload";
+import NoteCreation from "../../models/NoteCreation";
 
 export default function Dashboard() {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -37,10 +37,10 @@ export default function Dashboard() {
                 <MaterialIcons name="menu" size={26} color="black" />
                 <Text style={styles.searchText}>Search your notes</Text>
                 <MaterialIcons name="view-module" size={26} color="black" />
-                <Image style={styles.profileIcon} source={require("../assets/images/profile.png")} />
+                <Image style={styles.profileIcon} source={require("../../assets/images/profile.png")} />
             </View>
 
-            {/* Empty State */}
+            {/* Body */}
             <View style={styles.emptyState}>
                 <MaterialIcons name="lightbulb-outline" size={100} color="#fbbc04" />
                 <Text style={styles.emptyText}>Notes you add appear here</Text>
@@ -85,7 +85,7 @@ export default function Dashboard() {
 
             {/* Floating Button */}
             <TouchableOpacity style={styles.floatingButton} onPress={toggleCreateNoteModal}>
-                <Image style={styles.fabIcon} source={require("../assets/images/plus_button.png")} />
+                <Image style={styles.fabIcon} source={require("../../assets/images/plus_button.png")} />
             </TouchableOpacity>
         </View>
     );

@@ -1,32 +1,28 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
-import { auth } from "../FirebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-export default function Register() {
+export default function Login() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [registerButton, setRegisterButton] = useState(false);
+    const [loginButton, setLoginButton] = useState(false);
 
-    const register = async () => {
-        if (password !== confirmPassword) {
-            Alert.alert("Error", "Passwords do not match!");
-            return;
-        }
-
-        setRegisterButton(true);
+    const login = async () => {
+        setLoginButton(true);
 
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            Alert.alert("Registration Success", "User has been registered successfully!");
-            router.push("login");
+            const credentials = await signInWithEmailAndPassword(auth, email, password);
+            if (credentials) {
+                Alert.alert("Login Success", "User Logged in Successfully!");
+                router.push("screens/dashboard");
+            }
         } catch (error) {
-            Alert.alert("Registration Failed", error.message);
+            Alert.alert("Login Failed", error.message);
         } finally {
-            setRegisterButton(false);
+            setLoginButton(false);
         }
     };
 
@@ -34,8 +30,8 @@ export default function Register() {
         <View style={styles.container}>
             <View style={styles.innerContainer}>
 
-                <Text style={styles.title}>Create a New Account</Text>
-                <Text style={styles.subtitle}>Sign up to start using Google Keep</Text>
+                <Text style={styles.title}>Welcome Back to Keep!</Text>
+                <Text style={styles.subtitle}>Login to access your notes</Text>
 
                 <TextInput
                     style={styles.input}
@@ -49,7 +45,7 @@ export default function Register() {
 
                 <TextInput
                     style={styles.input}
-                    placeholder="Create a password"
+                    placeholder="Enter your password"
                     placeholderTextColor="#aaa"
                     value={password}
                     onChangeText={setPassword}
@@ -57,33 +53,23 @@ export default function Register() {
                     autoCapitalize="none"
                 />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Confirm password"
-                    placeholderTextColor="#aaa"
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                    secureTextEntry
-                    autoCapitalize="none"
-                />
-
                 <TouchableOpacity
-                    style={[styles.button, registerButton && styles.buttonDisabled]}
-                    onPress={register}
-                    disabled={registerButton}
+                    style={[styles.button, loginButton && styles.buttonDisabled]}
+                    onPress={login}
+                    disabled={loginButton}
                 >
-                    {registerButton ? (
+                    {loginButton ? (
                         <View style={styles.loadingContainer}>
                             <ActivityIndicator size="small" color="#333" />
-                            <Text style={styles.loggingText}> Registering...</Text>
+                            <Text style={styles.loggingText}> Logging...</Text>
                         </View>
                     ) : (
-                        <Text style={styles.buttonText}>Register</Text>
+                        <Text style={styles.buttonText}>Login</Text>
                     )}
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => router.push("login")}>
-                    <Text style={styles.link}>Already have an account? Login</Text>
+                <TouchableOpacity onPress={() => router.push("screens/register")}>
+                    <Text style={styles.link}>Didn't have an account? Create</Text>
                 </TouchableOpacity>
 
             </View>
