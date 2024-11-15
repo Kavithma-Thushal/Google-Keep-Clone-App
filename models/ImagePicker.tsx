@@ -9,7 +9,7 @@ type Props = {
     onImageSelected: (image: string) => void;
 };
 
-const ImagePicker2: React.FC<Props> = ({ visible, onClose, onImageSelected }) => {
+const CustomImagePicker: React.FC<Props> = ({ visible, onClose, onImageSelected }) => {
 
     const pickImage = async () => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ImagePicker2;
+export default CustomImagePicker;
