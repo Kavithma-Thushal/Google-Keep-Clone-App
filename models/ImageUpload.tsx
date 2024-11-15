@@ -26,9 +26,9 @@ const ImageUploadModal: React.FC<Props> = ({ visible, onClose, image }) => {
             const storageRef = ref(storage, `images/${new Date().toISOString()}`);
             await uploadBytes(storageRef, blob);
 
-            Alert.alert("Success", "Image uploaded successfully!");
+            Alert.alert("Upload Success", "Image uploaded successfully!");
         } catch (error) {
-            Alert.alert("Error", "Failed to upload image.");
+            Alert.alert("Upload Failed", error.message);
         } finally {
             setUploadButton(false);
             onClose();
