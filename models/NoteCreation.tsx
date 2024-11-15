@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { auth } from '../FirebaseConfig';
-import ImagePicker from "../models/ImagePicker2";
-import ImageUpload from "../models/ImageUpload2";
 import ColorPalette from "./ColorPalette";
+import ImagePicker from "./ImagePicker";
+import ImageUpload from "./ImageUpload";
 import saveNote from "../utils/SaveNote";
 
 export default function CreateNoteScreen({ navigation }) {
@@ -42,7 +42,6 @@ export default function CreateNoteScreen({ navigation }) {
     const handleSaveNote = async () => {
         try {
             const user = auth.currentUser;
-
             if (user) {
                 const username = user.email;
                 await saveNote({ title, content, color, username });

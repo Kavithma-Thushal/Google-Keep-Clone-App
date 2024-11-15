@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, StyleSheet, TouchableOpacity, Text, Modal, TouchableWithoutFeedback, Alert, ActivityIndicator } from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity, Text, Modal, TouchableWithoutFeedback, Alert, ActivityIndicator, } from "react-native";
 import { storage } from "../FirebaseConfig";
 import { ref, uploadBytes } from "firebase/storage";
 

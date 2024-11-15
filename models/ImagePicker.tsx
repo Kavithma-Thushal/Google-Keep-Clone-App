@@ -9,8 +9,8 @@ type Props = {
     onImageSelected: (image: string) => void;
 };
 
-const ImagePickerModal: React.FC<Props> = ({ visible, onClose, onImageSelected }) => {
-    
+const ImagePicker2: React.FC<Props> = ({ visible, onClose, onImageSelected }) => {
+
     const pickImage = async () => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -40,17 +40,27 @@ const ImagePickerModal: React.FC<Props> = ({ visible, onClose, onImageSelected }
         >
             <TouchableWithoutFeedback onPress={onClose}>
                 <View style={styles.modalContainer}>
-                    <TouchableWithoutFeedback onPress={() => {
-                    }}>
+                    <TouchableWithoutFeedback>
                         <View style={styles.modalView}>
-                            <Text style={styles.modalText}>Add Image</Text>
                             <TouchableOpacity style={styles.modalButton}>
                                 <MaterialIcons name="camera-alt" size={24} color="black" />
-                                <Text style={styles.modalButtonText}>Take Photo</Text>
+                                <Text style={styles.modalButtonText}>Take photo</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.modalButton} onPress={pickImage}>
                                 <MaterialIcons name="photo" size={24} color="black" />
-                                <Text style={styles.modalButtonText}>Choose Image</Text>
+                                <Text style={styles.modalButtonText}>Add image</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.modalButton}>
+                                <MaterialIcons name="brush" size={24} color="black" />
+                                <Text style={styles.modalButtonText}>Drawing</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.modalButton}>
+                                <MaterialIcons name="mic" size={24} color="black" />
+                                <Text style={styles.modalButtonText}>Recording</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.modalButton}>
+                                <MaterialIcons name="check-box" size={24} color="black" />
+                                <Text style={styles.modalButtonText}>Checkboxes</Text>
                             </TouchableOpacity>
                         </View>
                     </TouchableWithoutFeedback>
@@ -65,35 +75,26 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 40,
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     modalView: {
-        width: 350,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 20,
-        alignItems: "center",
-        elevation: 5,
-    },
-    modalText: {
-        fontSize: 18,
-        fontWeight: "bold",
-        marginBottom: 15,
-        textAlign: "left",
         width: "100%",
+        position: "absolute",
+        bottom: 0,
+        backgroundColor: "white",
+        padding: 16,
+        elevation: 5,
     },
     modalButton: {
         flexDirection: "row",
         alignItems: "center",
-        marginVertical: 10,
-        width: "100%",
+        paddingVertical: 12,
     },
     modalButtonText: {
-        marginLeft: 10,
+        marginLeft: 16,
         fontSize: 16,
-        textAlign: "left",
+        color: "black",
     },
 });
 
-export default ImagePickerModal;
+export default ImagePicker2;

@@ -1,29 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image, Modal } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import ImagePicker from "../../models/ImagePicker";
-import ImageUpload from "../../models/ImageUpload";
 import NoteCreation from "../../models/NoteCreation";
 
 export default function Dashboard() {
-    const [isModalVisible, setModalVisible] = useState(false);
-    const [isImagePreviewVisible, setImagePreviewVisible] = useState(false);
-    const [image, setImage] = useState<string | null>(null);
     const [isCreateNoteModalVisible, setCreateNoteModalVisible] = useState(false);
-
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
-    };
-
-    const toggleImagePreview = () => {
-        setImagePreviewVisible(!isImagePreviewVisible);
-    };
-
-    const handleImageSelected = (selectedImage: string) => {
-        setImage(selectedImage);
-        toggleImagePreview();
-        toggleModal();
-    };
 
     const toggleCreateNoteModal = () => {
         setCreateNoteModalVisible(!isCreateNoteModalVisible);
@@ -46,6 +27,13 @@ export default function Dashboard() {
                 <Text style={styles.emptyText}>Notes you add appear here</Text>
             </View>
 
+            {/* Create Note Modal */}
+            <Modal visible={isCreateNoteModalVisible} animationType="slide" transparent={true}>
+                <View style={styles.modalContainer}>
+                    <NoteCreation navigation={{ goBack: toggleCreateNoteModal }} />
+                </View>
+            </Modal>
+
             {/* Bottom Toolbar */}
             <View style={styles.bottomToolbar}>
                 <TouchableOpacity style={styles.toolbarButton}>
@@ -57,31 +45,10 @@ export default function Dashboard() {
                 <TouchableOpacity style={styles.toolbarButton}>
                     <MaterialIcons name="mic" size={25} color="gray" />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.toolbarButton} onPress={toggleModal}>
+                <TouchableOpacity style={styles.toolbarButton}>
                     <MaterialIcons name="image" size={25} color="gray" />
                 </TouchableOpacity>
             </View>
-
-            {/* Image Picker Modal */}
-            <ImagePicker
-                visible={isModalVisible}
-                onClose={toggleModal}
-                onImageSelected={handleImageSelected}
-            />
-
-            {/* Image Upload Modal */}
-            <ImageUpload
-                visible={isImagePreviewVisible}
-                onClose={toggleImagePreview}
-                image={image}
-            />
-
-            {/* Create Note Modal */}
-            <Modal visible={isCreateNoteModalVisible} animationType="slide" transparent={true}>
-                <View style={styles.modalContainer}>
-                    <NoteCreation navigation={{ goBack: toggleCreateNoteModal }} />
-                </View>
-            </Modal>
 
             {/* Floating Button */}
             <TouchableOpacity style={styles.floatingButton} onPress={toggleCreateNoteModal}>
@@ -117,6 +84,7 @@ const styles = StyleSheet.create({
     profileIcon: {
         width: 35,
         height: 35,
+        marginLeft: 10,
         borderRadius: 20,
         backgroundColor: "#f5f5f5",
     },
@@ -148,10 +116,10 @@ const styles = StyleSheet.create({
     },
     floatingButton: {
         position: "absolute",
-        bottom: 30,
-        right: 30,
+        bottom: 20,
+        right: 20,
         backgroundColor: "#f5f5f5",
-        borderRadius: 20,
+        borderRadius: 15,
         width: 60,
         height: 60,
         justifyContent: "center",
