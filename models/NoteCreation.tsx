@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity, Text, Alert, ActivityIndicator } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { auth } from '../FirebaseConfig';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { auth, storage } from '../FirebaseConfig';
 import ColorPalette from "./ColorPalette";
 import ImagePicker from "./ImagePicker";
 import ImageUpload from "./ImageUpload";
@@ -15,6 +16,7 @@ export default function CreateNoteScreen({ navigation }) {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [color, setColor] = useState("#ffffff");
+    const [saveButton, setSaveButton] = useState(false);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -40,18 +42,42 @@ export default function CreateNoteScreen({ navigation }) {
     };
 
     const handleSaveNote = async () => {
+        setSaveButton(true);
         try {
+
             const user = auth.currentUser;
-            if (user) {
-                const username = user.email;
-                await saveNote({ title, content, color, username });
-                Alert.alert("Success", "Note saved successfully!");
-                navigation.goBack();
-            } else {
+            if (!user) {
                 Alert.alert("Error", "User not authenticated!");
+                return;
             }
+
+            const username = user.email;
+            let imageUrl = null;
+
+            if (image) {
+                try {
+                    const response = await fetch(image);
+                    const blob = await response.blob();
+                    const storageRef = ref(storage, `images/${new Date().toISOString()}`);
+                    await uploadBytes(storageRef, blob);
+                    imageUrl = await getDownloadURL(storageRef);
+                } catch (error) {
+                    Alert.alert("Error", "Failed to upload image to Firebase Storage!");
+                } finally {
+                    setSaveButton(false);
+                }
+            }
+
+            await saveNote({ title, content, color, username, imageUrl });
+            Alert.alert("Success", "Note saved successfully!");
         } catch (error) {
-            Alert.alert("Error", "Failed to save note");
+            Alert.alert("Error", "Failed to save the note!");
+        } finally {
+            setImage(null);
+            setTitle("");
+            setContent("");
+            setColor("#ffffff");
+            setSaveButton(false);
         }
     };
 
@@ -76,6 +102,13 @@ export default function CreateNoteScreen({ navigation }) {
                 </View>
             </View>
 
+            {/* Image Upload Modal */}
+            <ImageUpload
+                visible={isImagePreviewVisible}
+                onClose={toggleImagePreview}
+                image={image}
+            />
+
             {/* Note Content */}
             <View style={styles.noteContent}>
                 <TextInput
@@ -96,8 +129,18 @@ export default function CreateNoteScreen({ navigation }) {
             </View>
 
             {/* Save Button */}
-            <TouchableOpacity style={styles.saveButton} onPress={handleSaveNote}>
-                <Text style={styles.saveButtonText}>Save Note</Text>
+            <TouchableOpacity
+                style={[styles.saveButton, saveButton && styles.buttonDisabled]}
+                onPress={handleSaveNote}
+                disabled={saveButton}>
+                {saveButton ? (
+                    <View style={styles.loadingContainer}>
+                        <ActivityIndicator size="small" color="#333" />
+                        <Text style={styles.saveButtonText}> Saving...</Text>
+                    </View>
+                ) : (
+                    <Text style={styles.saveButtonText}>Save Note</Text>
+                )}
             </TouchableOpacity>
 
             {/* Bottom Toolbar */}
@@ -124,13 +167,6 @@ export default function CreateNoteScreen({ navigation }) {
                 onImageSelected={handleImageSelected}
             />
 
-            {/* Image Upload Modal */}
-            <ImageUpload
-                visible={isImagePreviewVisible}
-                onClose={toggleImagePreview}
-                image={image}
-            />
-
             {/* Color Palette Modal */}
             <ColorPalette
                 visible={isPaletteVisible}
@@ -150,7 +186,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 16,
+        padding: 12,
     },
     headerActions: {
         flexDirection: 'row',
@@ -161,7 +197,7 @@ const styles = StyleSheet.create({
     },
     noteContent: {
         flex: 1,
-        padding: 16,
+        padding: 12,
     },
     titleInput: {
         fontSize: 24,
@@ -197,10 +233,18 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
     },
+    buttonDisabled: {
+        backgroundColor: "#f3b82a",
+        opacity: 0.7,
+    },
+    loadingContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
     bottomToolbar: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 16,
+        padding: 12,
         borderTopWidth: 1,
         borderTopColor: '#e0e0e0',
     },
