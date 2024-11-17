@@ -51,7 +51,7 @@ export default function Dashboard() {
             {notes.length === 0 ? (
                 <View style={styles.emptyState}>
                     <MaterialIcons name="lightbulb-outline" size={100} color="#fbbc04" />
-                    <Text style={styles.emptyText}>No notes added yet</Text>
+                    <Text style={styles.emptyText}>Notes you add appear here</Text>
                 </View>
             ) : (
                 <FlatList
