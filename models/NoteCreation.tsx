@@ -69,15 +69,10 @@ export default function CreateNoteScreen({ navigation }) {
             }
 
             await saveNote({ title, content, color, username, imageUrl });
+            navigation.goBack();
             Alert.alert("Success", "Note saved successfully!");
         } catch (error) {
             Alert.alert("Error", "Failed to save the note!");
-        } finally {
-            setImage(null);
-            setTitle("");
-            setContent("");
-            setColor("#ffffff");
-            setSaveButton(false);
         }
     };
 

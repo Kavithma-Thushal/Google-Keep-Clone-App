@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     notesList: {
-        marginTop: 20
+        marginTop: 20,
     },
     noteItem: {
         padding: 15,
@@ -210,9 +210,8 @@ const styles = StyleSheet.create({
     noteImage: {
         width: 100,
         height: 100,
-        marginRight: 5,
         borderRadius: 8,
-        marginTop:-20
+        marginTop:-22
     },
     imageFallback: {
         flex: 1,
