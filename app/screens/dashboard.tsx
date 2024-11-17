@@ -1,18 +1,44 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image, Modal } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Modal, FlatList } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import NoteCreation from "../../models/NoteCreation";
+import getAll from "../../utils/getAll";
 
 export default function Dashboard() {
     const [isCreateNoteModalVisible, setCreateNoteModalVisible] = useState(false);
+    const [notes, setNotes] = useState([]);
+
+    useEffect(() => {
+        getAllNotes();
+    });
+
+    const getAllNotes = async () => {
+        try {
+            const notesData = await getAll();
+            if (notesData && Array.isArray(notesData)) {
+                setNotes(notesData);
+            } else {
+                setNotes([]);
+            }
+        } catch (error) {
+            console.error("Error fetching notes:", error);
+            setNotes([]);
+        }
+    };
 
     const toggleCreateNoteModal = () => {
         setCreateNoteModalVisible(!isCreateNoteModalVisible);
     };
 
+    const renderNote = ({ item }) => (
+        <View style={styles.noteItem}>
+            <Text style={styles.noteTitle}>{item.title}</Text>
+            <Text style={styles.noteContent}>{item.content}</Text>
+        </View>
+    );
+
     return (
         <View style={styles.container}>
-
             {/* Search Bar */}
             <View style={styles.searchBar}>
                 <MaterialIcons name="menu" size={26} color="black" />
@@ -21,11 +47,20 @@ export default function Dashboard() {
                 <Image style={styles.profileIcon} source={require("../../assets/images/profile.png")} />
             </View>
 
-            {/* Body */}
-            <View style={styles.emptyState}>
-                <MaterialIcons name="lightbulb-outline" size={100} color="#fbbc04" />
-                <Text style={styles.emptyText}>Notes you add appear here</Text>
-            </View>
+            {/* Note List */}
+            {notes.length === 0 ? (
+                <View style={styles.emptyState}>
+                    <MaterialIcons name="lightbulb-outline" size={100} color="#fbbc04" />
+                    <Text style={styles.emptyText}>No notes added yet</Text>
+                </View>
+            ) : (
+                <FlatList
+                    data={notes}
+                    renderItem={renderNote}
+                    keyExtractor={(item) => item._id}
+                    contentContainerStyle={styles.notesList}
+                />
+            )}
 
             {/* Create Note Modal */}
             <Modal visible={isCreateNoteModalVisible} animationType="slide" transparent={true}>
@@ -69,7 +104,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#ebebf5",
         padding: 10,
-        marginTop: 10,
+        marginTop: 20,
         borderRadius: 38,
         marginHorizontal: 10,
         height: 50,
@@ -97,6 +132,29 @@ const styles = StyleSheet.create({
         color: "black",
         fontSize: 15,
         marginTop: 10,
+    },
+    notesList: {
+        marginTop: 30
+    },
+    noteItem: {
+        backgroundColor: "#fff",
+        padding: 15,
+        margin: 15,
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        elevation: 3,
+    },
+    noteTitle: {
+        fontSize: 18,
+        fontWeight: "bold",
+    },
+    noteContent: {
+        marginTop: 5,
+        color: "#555",
+        fontSize: 14,
     },
     bottomToolbar: {
         flexDirection: "row",
