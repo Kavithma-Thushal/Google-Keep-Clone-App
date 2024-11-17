@@ -31,7 +31,7 @@ export default function Dashboard() {
     };
 
     const renderNote = ({ item }) => (
-        <View style={styles.noteItem}>
+        <View style={[styles.noteItem, { backgroundColor: item.color || "#fff" }]}>
             <Text style={styles.noteTitle}>{item.title}</Text>
             <Text style={styles.noteContent}>{item.content}</Text>
         </View>
@@ -134,12 +134,11 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     notesList: {
-        marginTop: 30
+        marginTop: 20
     },
     noteItem: {
-        backgroundColor: "#fff",
         padding: 15,
-        margin: 15,
+        margin: 10,
         borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
