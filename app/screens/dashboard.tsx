@@ -30,12 +30,25 @@ export default function Dashboard() {
         setCreateNoteModalVisible(!isCreateNoteModalVisible);
     };
 
-    const renderNote = ({ item }) => (
-        <View style={[styles.noteItem, { backgroundColor: item.color || "#fff" }]}>
-            <Text style={styles.noteTitle}>{item.title}</Text>
-            <Text style={styles.noteContent}>{item.content}</Text>
-        </View>
-    );
+    const renderNote = ({ item }) => {
+        return (
+            <View style={[styles.noteItem, { backgroundColor: item.color || "#fff" }]}>
+                <Text style={styles.noteTitle}>{item.title}</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={[styles.noteContent, styles.imageFallback]}>{item.content}</Text>
+                    {item.imageUrl && (
+                        <Image
+                            source={{ uri: item.imageUrl }}
+                            style={styles.noteImage}
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                            }}
+                        />
+                    )}
+                </View>
+            </View>
+        );
+    };
 
     return (
         <View style={styles.container}>
@@ -193,5 +206,15 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         overflow: 'hidden',
+    },
+    noteImage: {
+        width: 100,
+        height: 100,
+        marginRight: 5,
+        borderRadius: 8,
+        marginTop:-20
+    },
+    imageFallback: {
+        flex: 1,
     },
 });
