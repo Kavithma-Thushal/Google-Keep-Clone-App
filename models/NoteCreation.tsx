@@ -6,7 +6,7 @@ import { auth, storage } from '../FirebaseConfig';
 import ColorPalette from "./ColorPalette";
 import ImagePicker from "./ImagePicker";
 import ImageUpload from "./ImageUpload";
-import saveNote from "../utils/SaveNote";
+import saveNote from "../utils/save";
 
 export default function CreateNoteScreen({ navigation }) {
     const [isModalVisible, setModalVisible] = useState(false);
