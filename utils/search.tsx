@@ -13,7 +13,7 @@ const Search = ({ search, setSearch }) => {
             />
             <TextInput
                 style={styles.searchInput}
-                placeholder="Search your notes"
+                placeholder="Search your notes" 
                 placeholderTextColor="#666"
                 value={search}
                 onChangeText={(term) => setSearch(term)}
