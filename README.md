@@ -43,12 +43,12 @@ This repository contains the frontend for the **Google Keep Clone App**, a cours
     </tr>
     <tr>
       <td align="left">
-      <p>Image Picker</p>
-        <img src='assets/images/ss/ImagePicker.png' alt='Image Picker' width='390px'>
+      <p>Note Creation</p>
+        <img src='assets/images/ss/Note-Creation.png' alt='Note Creation' width='390px'>
       </td>
       <td align="left">
-      <p>Upload Image</p>
-        <img src='assets/images/ss/UploadImage.png' alt='Upload Image' width='390px'>
+      <p>Note List</p>
+        <img src='assets/images/ss/Note-List.png' alt='Note List' width='390px'>
       </td>
     </tr>
   </table>
