@@ -12,7 +12,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         getAllNotes();
-    }, []);
+    });
 
     const getAllNotes = async () => {
         try {
