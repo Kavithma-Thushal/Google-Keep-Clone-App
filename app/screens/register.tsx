@@ -22,7 +22,7 @@ export default function Register() {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
             Alert.alert("Registration Success", "User has been registered successfully!");
-            router.push("login");
+            router.push("screens/login");
         } catch (error) {
             Alert.alert("Registration Failed", error.message);
         } finally {
@@ -82,7 +82,7 @@ export default function Register() {
                     )}
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => router.push("login")}>
+                <TouchableOpacity onPress={() => router.push("screens/login")}>
                     <Text style={styles.link}>Already have an account? Login</Text>
                 </TouchableOpacity>
 
