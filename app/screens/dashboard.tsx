@@ -1,16 +1,19 @@
+// Dashboard.js
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image, Modal, FlatList } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import NoteCreation from "../../models/NoteCreation";
 import getAll from "../../utils/getAll";
+import SearchBar from "../../utils/search";
 
 export default function Dashboard() {
     const [isCreateNoteModalVisible, setCreateNoteModalVisible] = useState(false);
     const [notes, setNotes] = useState([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         getAllNotes();
-    });
+    }, []);
 
     const getAllNotes = async () => {
         try {
@@ -29,6 +32,10 @@ export default function Dashboard() {
     const toggleCreateNoteModal = () => {
         setCreateNoteModalVisible(!isCreateNoteModalVisible);
     };
+
+    const filteredNotes = notes.filter(note =>
+        note.title.toLowerCase().includes(search.toLowerCase())
+    );
 
     const renderNote = ({ item }) => {
         return (
@@ -52,23 +59,19 @@ export default function Dashboard() {
 
     return (
         <View style={styles.container}>
-            {/* Search Bar */}
-            <View style={styles.searchBar}>
-                <MaterialIcons name="menu" size={26} color="black" />
-                <Text style={styles.searchText}>Search your notes</Text>
-                <MaterialIcons name="view-module" size={26} color="black" />
-                <Image style={styles.profileIcon} source={require("../../assets/images/profile.png")} />
-            </View>
+
+            {/* Search */}
+            <SearchBar search={search} setSearch={setSearch} />
 
             {/* Note List */}
-            {notes.length === 0 ? (
+            {filteredNotes.length === 0 ? (
                 <View style={styles.emptyState}>
                     <MaterialIcons name="lightbulb-outline" size={100} color="#fbbc04" />
-                    <Text style={styles.emptyText}>Notes you add appear here</Text>
+                    <Text style={styles.emptyText}>No matching notes found</Text>
                 </View>
             ) : (
                 <FlatList
-                    data={notes}
+                    data={filteredNotes}
                     renderItem={renderNote}
                     keyExtractor={(item) => item._id}
                     contentContainerStyle={styles.notesList}
@@ -111,40 +114,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#faf8ff",
         justifyContent: "center",
-    },
-    searchBar: {
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: "#ebebf5",
-        padding: 10,
-        marginTop: 20,
-        borderRadius: 38,
-        marginHorizontal: 10,
-        height: 50,
-        justifyContent: 'space-between',
-    },
-    searchText: {
-        color: "#888",
-        fontSize: 16,
-        marginLeft: 10,
-        flex: 1,
-    },
-    profileIcon: {
-        width: 35,
-        height: 35,
-        marginLeft: 10,
-        borderRadius: 20,
-        backgroundColor: "#f5f5f5",
-    },
-    emptyState: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    emptyText: {
-        color: "black",
-        fontSize: 15,
-        marginTop: 10,
     },
     notesList: {
         marginTop: 20,
@@ -211,9 +180,19 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 8,
-        marginTop:-22
+        marginTop: -22
     },
     imageFallback: {
         flex: 1,
+    },
+    emptyState: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    emptyText: {
+        color: "black",
+        fontSize: 15,
+        marginTop: 10,
     },
 });
