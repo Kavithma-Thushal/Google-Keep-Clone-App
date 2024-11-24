@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const getAll = async () => {
-    const url = 'http://192.168.194.54:3000/api/v1/note/getAll';
+    const url = 'http://192.168.242.54:3000/api/v1/note/getAll';
     try {
         const response = await axios.get(url);
         return response.data;
